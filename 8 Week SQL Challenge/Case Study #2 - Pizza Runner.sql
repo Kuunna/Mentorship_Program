@@ -161,7 +161,19 @@ SELECT
     END) AS both_exclusions_and_extras
 FROM customer_orders_temp AS c 
 JOIN runner_orders_temp AS r ON c.order_id = r.order_id
-WHERE r.distance != 0 
-	AND exclusions <> ' ' 
-  	AND extras <> ' '
+WHERE r.distance != 0 AND exclusions <> ' ' AND extras <> ' '
 GROUP by  c.customer_id
+
+-- 9. What was the total volume of pizzas ordered for each hour of the day?
+SELECT 
+  DATEPART(HOUR, [order_time]) AS hour_of_day, 
+  COUNT(order_id) AS pizza_count
+FROM customer_orders_temp
+GROUP BY DATEPART(HOUR, [order_time]);
+
+-- 10. What was the volume of orders for each day of the week?
+SELECT 
+  DATENAME(WEEKDAY, [order_time]) AS hour_of_day, 
+  COUNT(order_id) AS pizza_count
+FROM customer_orders_temp
+GROUP BY DATENAME(WEEKDAY, [order_time])
