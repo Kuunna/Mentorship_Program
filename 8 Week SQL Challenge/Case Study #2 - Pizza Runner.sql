@@ -1,4 +1,4 @@
-CREATE TABLE customer_orders (
+CREATE TABLE customer_orders_temp (
     order_id INT,
     customer_id INT,
     pizza_id INT,
@@ -7,7 +7,7 @@ CREATE TABLE customer_orders (
     order_time DATETIME
 );
 
-INSERT INTO customer_orders (order_id, customer_id, pizza_id, exclusions, extras, order_time)
+INSERT INTO customer_orders_temp (order_id, customer_id, pizza_id, exclusions, extras, order_time)
 VALUES 
 (1, 101, 1, '', '', '2021-01-01 18:05:02.000'),
 (2, 101, 1, '', '', '2021-01-01 19:00:52.000'),
@@ -96,10 +96,10 @@ FROM customer_orders_temp;
 SELECT COUNT(DISTINCT *) AS unique_customer_orders
 FROM customer_orders_temp;
 
--- 3. How many successful orders were delivered by each runner ?
+-- 3. How many successful orders were delivered by each runner?
 SELECT runner_id, COUNT(order_id) AS successful_orders
 FROM runner_orders_temp
-WHERE distance != 0
+WHERE distance > 0
 GROUP BY runner_id;
 
 -- 4. How many of each type of pizza was delivered?
@@ -271,4 +271,3 @@ SELECT
    AS success_percentage
 FROM runner_orders_temp
 GROUP by runner_id
-
