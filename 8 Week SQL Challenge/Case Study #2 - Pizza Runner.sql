@@ -123,16 +123,16 @@ ORDER BY  c.customer_id
 
 -- 6. What was the maximum number of pizzas delivered in a single order? 
 WITH pizza_count AS (
-	SELECT 
+    SELECT 
       c.order_id, 
       COUNT(c.pizza_id) as pizza_per_order
     FROM customer_orders_temp AS c 
-	JOIN runner_orders_temp AS r ON c.order_id = r.order_id
+    JOIN runner_orders_temp AS r ON c.order_id = r.order_id
     WHERE r.distance != 0
-  	GROUP by  c.order_id
+    GROUP by  c.order_id
 )
 SELECT top 1
-	order_id,
+    order_id,
     MAX(pizza_per_order) AS max_per_order
 FROM pizza_count
 GROUP by order_id
@@ -208,7 +208,7 @@ WITH time_taken AS
   GROUP BY c.order_id, c.order_time, r.pickup_time
 )
 SELECT
-	avg(pickup_minutes) AS avg_pigup_times
+     avg(pickup_minutes) AS avg_pigup_times
 from time_taken
 WHERE pickup_minutes > 1
 
