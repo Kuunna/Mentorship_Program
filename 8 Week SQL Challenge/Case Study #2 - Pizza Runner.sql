@@ -82,10 +82,31 @@ CREATE TABLE pizza_recipes (
     toppings VARCHAR(255)
 );
 
+INSERT INTO pizza_recipes (pizza_id, toppings)
+VALUES 
+   (1, '1,2,4'),   -- Margherita: Tomato sauce, Mozzarella, Basil
+   (2, '1,3,8'),   -- Pepperoni: Tomato sauce, Mozzarella, Pepperoni
+   (3, '4,5,6,9'), -- Veggie: Tomato sauce, Mozzarella, Mushrooms, Onions, Peppers
+   (4, '1,2,3,7'); -- Meat Lovers: Tomato sauce, Mozzarella, Beef, Sausage
+
+
 CREATE TABLE pizza_toppings (
     topping_id INT,
    topping_name VARCHAR(255)
 );
+
+INSERT INTO pizza_toppings (topping_id, topping_name)
+VALUES
+   (1, 'Tomato sauce'),
+   (2, 'Mozzarella'),
+   (3, 'Pepperoni'),
+   (4, 'Mushrooms'),
+   (5, 'Onions'),
+   (6, 'Peppers'),
+   (7, 'Sausage'),
+   (8, 'Basil'),
+   (9, 'Beef');
+
 
 -- A. Pizza Metrics
 -- 1. How many pizzas were ordered?
@@ -271,3 +292,161 @@ SELECT
    AS success_percentage
 FROM runner_orders_temp
 GROUP by runner_id
+
+-- 1. What are the standard ingredients for each pizza?
+WITH Toppings AS (
+    SELECT 
+      pr.pizza_id, 
+      pt.topping_name
+    FROM pizza_recipes pr
+    CROSS APPLY STRING_SPLIT(pr.toppings, ',') AS toppings_split
+    JOIN pizza_toppings pt ON pt.topping_id = toppings_split.value
+)
+SELECT 
+  pizza_id, 
+  STRING_AGG(topping_name, ', ') WITHIN GROUP(ORDER BY topping_name) AS toppings
+FROM Toppings
+GROUP BY pizza_id
+
+-- 2. What was the most commonly added extra? 
+WITH Toppings AS (
+    SELECT
+      pizza_id,
+      value AS topping_id
+    FROM pizza_recipes
+    CROSS APPLY STRING_SPLIT(toppings, ',')
+)
+SELECT 
+  t.topping_id, 
+  pt.topping_name, 
+  COUNT(t.topping_id) AS topping_count
+from Toppings t 
+JOIN pizza_toppings pt ON t.topping_id = pt.topping_id
+GROUP BY t.topping_id, pt.topping_name
+ORDER BY topping_count DESC;
+
+-- 3. What was the most common exclusion?
+WITH exclusions_topping AS (
+    SELECT
+  		value AS topping_id
+    FROM customer_orders_temp
+    CROSS APPLY STRING_SPLIT(exclusions, ',')
+    WHERE exclusions IS NOT NULL AND exclusions != ''
+)
+SELECT 
+	et.topping_id,
+    pt.topping_name,
+    COUNT(et.topping_id) AS the_most_common_exclusion
+FROM exclusions_topping AS et
+JOIN pizza_toppings pt ON et.topping_id = pt.topping_id
+GROUP BY et.topping_id, pt.topping_name
+ORDER BY the_most_common_exclusion DESC;
+
+-- D. Pricing and Ratings
+-- 1. If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes 
+--    how much money has Pizza Runner made so far if there are no delivery fees?
+WITH total AS (
+  SELECT 
+      order_id, 
+      SUM(CASE
+              WHEN pizza_id = 1 THEN 12
+              WHEN pizza_id = 2 THEN 10
+              ELSE 0
+          END) as money_total
+  from customer_orders_temp
+  GROUP by order_id
+)
+SELECT
+	SUM(money_total) AS money_total
+from total
+
+-- 2. What if there was an additional $1 charge for any pizza extras? 
+WITH total AS (
+    SELECT
+        order_id,
+        SUM(
+            CASE
+                WHEN pizza_id = 1 THEN 12  
+                WHEN pizza_id = 2 THEN 10  
+                ELSE 0
+            END
+        ) + 
+        SUM(
+            CASE 
+          		WHEN (extras IS NOT NULL AND extras != '') THEN (LEN(extras) - LEN(REPLACE(extras, ',', '')) + 1)
+          		ELSE 0 
+            END) 
+        AS money_total
+    FROM customer_orders_temp
+    GROUP BY order_id
+)
+SELECT 
+	SUM(money_total) AS total_revenue  
+FROM total;
+
+
+-- 3 Design new table for ratings for each successful customer order between 1 to 5.
+CREATE TABLE customer_runner_ratings (
+    rating_id INT,
+    order_id INT,
+    customer_id INT,
+    runner_id INT,
+    rating INT,
+    comment VARCHAR(255),
+    rating_date DATETIME
+ )
+INSERT INTO customer_runner_ratings (rating_id, order_id, customer_id, runner_id, rating, comment, rating_date)
+VALUES 
+	(1, 1, 101, 1, 5, 'Great service, fast delivery!', '2021-01-01 18:30:00'),
+	(2, 2, 101, 1, 4, 'Friendly runner, but a bit late.', '2021-01-01 19:30:00'),
+	(3, 3, 102, 1, 5, 'Excellent service, highly recommend!', '2021-01-03 00:30:00'),
+	(4, 4, 103, 2, 3, 'Food was cold, but the runner was nice.', '2021-01-04 14:30:00'),
+	(5, 5, 104, 3, 5, 'Fast and efficient delivery!', '2021-01-08 21:30:00'),
+	(6, 7, 105, 2, 4, 'Good communication, arrived on time.', '2021-01-08 22:00:00'),
+	(7, 8, 102, 2, 5, 'Amazing service, will order again!', '2021-01-10 00:45:00'),
+	(8, 9, 103, 2, 2, 'Late delivery, food was soggy.', '2021-01-10 12:00:00'),
+	(9,10, 104, 1, 4, 'Good service, but forgot the extra sauce.', '2021-01-11 19:30:00');
+
+-- 4 Create a table which has the following information for successful deliveries?
+SELECT
+    c.customer_id,
+    c.order_id,
+    r.runner_id,
+    cr.rating,
+    c.order_time,
+    r.pickup_time,
+    DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS time_between_order_and_pickup,
+    r.duration AS delivery_duration, 
+    ROUND((r.distance / TRY_CAST(r.duration AS FLOAT))* 60, 2) AS average_speed,
+    COUNT(c.order_id) AS total_number_of_pizzas 
+FROM customer_orders_temp c
+JOIN runner_orders_temp r ON c.order_id = r.order_id
+JOIN customer_runner_ratings cr ON c.order_id = cr.order_id
+WHERE r.cancellation IS NULL OR r.cancellation = ''  
+GROUP BY
+    c.customer_id, c.order_id, r.runner_id, cr.rating, c.order_time, r.pickup_time, r.distance, r.duration
+ORDER BY c.order_id;
+    
+-- 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled 
+--    how much money does Pizza Runner have left over after these deliveries?
+WITH total AS (
+    SELECT
+        c.order_id,
+        SUM(CASE
+                WHEN c.pizza_id = 1 THEN 12  
+                WHEN c.pizza_id = 2 THEN 10  
+                ELSE 0 END) 
+        + SUM(CASE 
+          		WHEN (c.extras IS NOT NULL AND c.extras != '') THEN (LEN(c.extras) - LEN(REPLACE(c.extras, ',', '')) + 1)
+          		ELSE 0 END ) 
+        - SUM(CASE 
+          		WHEN r.distance <> 0 THEN r.distance * 3 / 10 
+          		ELSE 0 END
+        ) AS money_total
+    FROM customer_orders_temp c
+	JOIN runner_orders_temp r ON c.order_id = r.order_id
+    GROUP BY c.order_id
+)
+SELECT 
+	ROUND(SUM(money_total), 2) AS total_revenue  
+FROM total
