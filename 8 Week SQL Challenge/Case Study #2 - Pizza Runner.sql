@@ -143,7 +143,7 @@ JOIN pizza_names AS p ON c.pizza_id = p.pizza_id
 Group BY  c.customer_id, p.pizza_name
 ORDER BY  c.customer_id
 
--- 6. What was the maximum number of pizzas delivered in a single order? 
+--6. What was the maximum number of pizzas delivered in a single order? 
 WITH pizza_count AS (
 	SELECT 
       c.order_id, 
@@ -293,6 +293,7 @@ SELECT
 FROM runner_orders_temp
 GROUP by runner_id
 
+-- C. Ingredient Optimisation
 -- 1. What are the standard ingredients for each pizza?
 WITH Toppings AS (
     SELECT 
