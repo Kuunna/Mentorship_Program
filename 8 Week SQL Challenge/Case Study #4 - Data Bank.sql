@@ -73,3 +73,23 @@ SELECT
   PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY total_days_in_node) AS percentile_95
 FROM total_node_days
 GROUP BY region_id
+
+-- B. Customer Transactions
+-- 1. What is the unique count and total amount for each transaction type?
+SELECT
+  txn_type, 
+  COUNT(customer_id) AS transaction_count, 
+  SUM(txn_amount) AS total_amount
+FROM customer_transactions
+GROUP BY txn_type
+
+-- 2. What is the average total historical deposit counts and amounts for all customers? 
+WITH deposits AS (
+  SELECT 
+    customer_id, 
+    COUNT(customer_id) AS txn_count, 
+    AVG(txn_amount) AS avg_amount
+  FROM customer_transactions
+  WHERE txn_type = 'deposit'
+  GROUP BY customer_id
+)
