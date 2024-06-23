@@ -93,3 +93,7 @@ WITH deposits AS (
   WHERE txn_type = 'deposit'
   GROUP BY customer_id
 )
+SELECT 
+  ROUND(AVG(txn_count), 1) AS avg_deposit_count, 
+  ROUND(AVG(avg_amount), 1) AS avg_deposit_amt
+FROM deposits
