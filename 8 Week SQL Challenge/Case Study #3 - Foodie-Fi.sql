@@ -179,11 +179,52 @@ FROM trial_plan t
 JOIN annual_plan a ON t.customer_id = a.customer_id
 
 -- 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+WITH trial_plan AS (
+    SELECT customer_id,
+           start_date AS trial_date
+    FROM subscriptions
+    WHERE plan_id = 0
+),
+annual_plan AS (
+    SELECT customer_id,
+           start_date AS annual_date
+    FROM subscriptions
+    WHERE plan_id = 3
+),
+bins AS (
+    SELECT 
+        DATEDIFF(day, trial.trial_date, annual.annual_date) AS days_to_upgrade,
+        CEILING((DATEDIFF(day, trial.trial_date, annual.annual_date) + 1) / 30.0) AS avg_days_to_upgrade
+    FROM trial_plan AS trial
+    JOIN annual_plan AS annual
+        ON trial.customer_id = annual.customer_id
+)
+SELECT 
+    CONCAT(((avg_days_to_upgrade - 1) * 30), ' - ', (avg_days_to_upgrade * 30), ' days') AS bucket,
+    COUNT(*) AS num_of_customers
+FROM bins
+GROUP BY avg_days_to_upgrade
+ORDER BY avg_days_to_upgrade;
+
+-- 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020? 
+WITH plan_rank AS (
+  SELECT 
+      customer_id,  
+	  plan_id, 
+	  LEAD(plan_id) OVER ( 
+      	PARTITION BY customer_id
+      	ORDER BY start_date) AS next_plan_id
+  FROM subscriptions
+  WHERE DATEPART(YEAR, start_date) = 2020
+)
+SELECT 
+  COUNT(customer_id) AS churned_customers
+FROM plan_rank
+WHERE plan_id = 2 AND next_plan_id = 1
 
 
 
-
-
+	
 
 CREATE TABLE plans (
   plan_id INTEGER,
