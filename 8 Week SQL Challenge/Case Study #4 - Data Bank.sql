@@ -97,3 +97,23 @@ SELECT
   ROUND(AVG(txn_count), 1) AS avg_deposit_count, 
   ROUND(AVG(avg_amount), 1) AS avg_deposit_amt
 FROM deposits
+
+-- 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month? 
+WITH monthly_transactions AS (
+  SELECT 
+    customer_id, 
+    DATE_PART('month', txn_date) AS mth,
+    SUM(CASE WHEN txn_type = 'deposit' THEN 0 ELSE 1 END) AS deposit_count,
+    SUM(CASE WHEN txn_type = 'purchase' THEN 0 ELSE 1 END) AS purchase_count,
+    SUM(CASE WHEN txn_type = 'withdrawal' THEN 1 ELSE 0 END) AS withdrawal_count
+  FROM customer_transactions
+  GROUP BY customer_id, DATE_PART('month', txn_date)
+)
+SELECT
+  mth,
+  COUNT(DISTINCT customer_id) AS customer_count
+FROM monthly_transactions
+WHERE deposit_count > 1 AND (purchase_count >= 1 OR withdrawal_count >= 1)
+GROUP BY mth
+
+-- 4. What is the closing balance for each customer at the end of the month? Also show the change in balance each month in the same table output.
