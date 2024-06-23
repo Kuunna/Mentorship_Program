@@ -1,5 +1,5 @@
-
 -- 1. How many customers has Foodie-Fi ever had?
+-- Variant A:
 SELECT 
 	COUNT(*) AS num_of_customers
 FROM (
@@ -7,7 +7,7 @@ FROM (
     FROM subscriptions
     GROUP BY customer_id
 ) Customer
-
+-- Variant B:
 SELECT 
 	COUNT(DISTINCT customer_id) AS num_of_customers
 FROM subscriptions
@@ -46,15 +46,15 @@ From subscriptions s
 JOIN plans P on s.plan_id = p.plan_id
 
 -- 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number? 
+-- Variant A:
 WITH plan_rank AS (
   SELECT 
-    s.customer_id, 
-    p.plan_id, 
+    customer_id, 
+    plan_id, 
 	ROW_NUMBER() OVER (
-    	PARTITION BY s.customer_id 
-        ORDER BY s.start_date) AS rank
-  FROM subscriptions AS s
-  JOIN plans p ON s.plan_id = p.plan_id
+    	PARTITION BY customer_id 
+        ORDER BY start_date) AS rank
+  FROM subscriptions
 )
 SELECT
 	SUM(
@@ -66,10 +66,31 @@ SELECT
         CASE
           WHEN plan_id = 4 AND rank = 2 THEN 1
           ELSE 0
-        END) * 100 / COUNT(DISTINCT customer_id), 2) AS churn_percent  
+        END) * 100.0 / COUNT(DISTINCT customer_id), 2) AS churn_percent  
 FROM plan_rank
+-- Variant B:
+WITH plan_rank AS (
+  SELECT 
+      s.customer_id,  
+	  p.plan_name, 
+	  LEAD(p.plan_name) OVER ( 
+      	PARTITION BY s.customer_id
+      	ORDER BY s.start_date) AS next_plan
+  FROM subscriptions AS s
+  JOIN plans p ON s.plan_id = p.plan_id
+)
+SELECT
+	COUNT(customer_id) AS Churn_count,
+    ROUND(100.0 * COUNT(customer_id) / 
+         ( SELECT 
+           		COUNT(DISTINCT customer_id) 
+      	   FROM subscriptions
+         ), 2) as churn_percent
+FROM plan_rank
+WHERE plan_name = 'trial'  AND next_plan = 'churn'
 
 -- 6. What is the number and percentage of customer plans after their initial free trial? 
+-- Variant A:
 SELECT  
     p.plan_id,
 	COUNT(DISTINCT s.customer_id) AS converted_customers,
@@ -81,10 +102,84 @@ SELECT
          ), 1) as conversion_percent
 FROM subscriptions AS s
 JOIN plans p ON s.plan_id = p.plan_id
-WHERE p.plan_id != 0
+WHERE p.plan_id > 0
 GROUP by p.plan_id
 
+-- Variant B:
+WITH plan_rank AS (
+  SELECT 
+      customer_id,  
+	  plan_id, 
+	  LEAD(plan_id) OVER ( 
+      	PARTITION BY customer_id
+      	ORDER BY start_date) AS next_plan_id
+  FROM subscriptions
+)
+SELECT
+	plan_id,
+    Count(plan_id) as converted_customers,
+    ROUND(100.0 * Count(plan_id) /
+          (select 
+          	COUNT(DISTINCT customer_id)
+          FROM subscriptions 
+          WHERE plan_id = 0
+         ), 1) as conversion_percent
+FROM plan_rank
+where plan_id > 0
+GROUP by plan_id
+ORDER by plan_id
 -- 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+WITH plan_rank AS (
+  SELECT 
+      customer_id,  
+	  plan_id, 
+	  LEAD(plan_id) OVER ( 
+      	PARTITION BY customer_id
+      	ORDER BY start_date) AS next_plan_id
+  FROM subscriptions
+  WHERE start_date <= '2020-12-31'
+)
+SELECT
+	plan_id,
+    Count(plan_id) as customers,
+    ROUND(100.0 * Count(plan_id) /
+          (select 
+          	COUNT(DISTINCT customer_id)
+          FROM subscriptions 
+          WHERE plan_id = 0
+         ), 1) as conversion_percent
+FROM plan_rank
+GROUP by plan_id
+ORDER by plan_id
+
+-- 8. How many customers have upgraded to an annual plan in 2020? 
+SELECT 
+	COUNT(DISTINCT customer_id) AS customers
+FROM subscriptions
+WHERE plan_id = 3 
+  AND start_date >= '2020-01-01' 
+  AND start_date <= '2020-12-31'
+  
+-- 9. How many days on average does it take for a customer to upgrade to an annual plan from the day they join Foodie-Fi?
+ WITH trial_plan AS (
+  SELECT customer_id,
+   start_date AS trial_date
+  FROM subscriptions
+  WHERE plan_id = 0
+), annual_plan AS (
+  SELECT 
+    customer_id, 
+    start_date AS annual_date
+  FROM subscriptions
+  WHERE plan_id = 3
+)
+SELECT
+	AVG(DATEDIFF(DAY,t.trial_date, a.annual_date)) AS avg_days_to_upgrade
+FROM trial_plan t 
+JOIN annual_plan a ON t.customer_id = a.customer_id
+
+-- 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+
 
 
 
