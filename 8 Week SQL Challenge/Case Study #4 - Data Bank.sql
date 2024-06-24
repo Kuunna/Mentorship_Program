@@ -117,7 +117,7 @@ WHERE deposit_count > 1 AND (purchase_count >= 1 OR withdrawal_count >= 1)
 GROUP BY mth
 
 -- 4. What is the closing balance for each customer at the end of the month? Also show the change in balance each month in the same table output.
--- Tính số dư giao dịch hàng tháng cho mỗi khách hàng
+-- CTE: Tính số dư giao dịch hàng tháng cho mỗi khách hàng
 WITH monthly_balances AS (
   SELECT 
     customer_id, 
@@ -129,7 +129,7 @@ WITH monthly_balances AS (
   FROM customer_transactions
   GROUP BY customer_id, EXTRACT(MONTH FROM txn_date)
 ),
--- Tính số dư tích lũy hàng tháng cho mỗi khách hàng
+-- CTE: Tính số dư tích lũy hàng tháng cho mỗi khách hàng
 cumulative_balances AS (
   SELECT 
     customer_id, 
@@ -137,6 +137,7 @@ cumulative_balances AS (
     SUM(monthly_balance) OVER (PARTITION BY customer_id ORDER BY month) AS closing_balance
   FROM monthly_balances
 )
+-- Truy vấn cuối cùng: Tính sự thay đổi số dư mỗi tháng và hiển thị kết quả
 SELECT 
   customer_id, 
   month, 
@@ -144,3 +145,83 @@ SELECT
   COALESCE(closing_balance - LAG(closing_balance, 1) OVER (PARTITION BY customer_id ORDER BY month), 0) AS change_in_balance
 FROM cumulative_balances
 ORDER BY customer_id, month
+
+-- 5. Comparing the closing balance of a customer’s first month and the closing balance from their second month, what percentage of customers:
+-- CTE: Tính số dư giao dịch hàng tháng cho mỗi khách hàng
+WITH monthly_balances AS (
+  SELECT 
+    customer_id, 
+    EXTRACT(MONTH FROM txn_date) AS month, 
+    SUM(CASE 
+      		WHEN txn_type = 'withdrawal' OR txn_type = 'purchase' THEN -txn_amount
+      		ELSE txn_amount 
+        END) AS monthly_balance
+  FROM customer_transactions
+  GROUP BY customer_id, EXTRACT(MONTH FROM txn_date)
+),
+-- CTE: Tính số dư tích lũy hàng tháng cho mỗi khách hàng
+cumulative_balances AS (
+  SELECT 
+    customer_id, 
+    month, 
+    SUM(monthly_balance) OVER (PARTITION BY customer_id ORDER BY month) AS closing_balance
+  FROM monthly_balances
+),
+-- CTE: Xác định số dư cuối tháng đầu tiên và tháng thứ hai của mỗi khách hàng
+first_second_month_balances AS (
+  SELECT 
+    customer_id, 
+    closing_balance AS first_month_balance,
+    LEAD(closing_balance, 1) OVER (PARTITION BY customer_id ORDER BY month) AS second_month_balance
+  FROM cumulative_balances
+  WHERE month IS NOT NULL
+)
+-- Truy vấn cuối cùng: Tính phần trăm khách hàng có sự thay đổi số dư
+SELECT
+  ROUND(100.0 * COUNT(*) FILTER (WHERE second_month_balance > first_month_balance) / COUNT(*), 2) AS percent_increased,
+  ROUND(100.0 * COUNT(*) FILTER (WHERE second_month_balance < first_month_balance) / COUNT(*), 2) AS percent_decreased,
+  ROUND(100.0 * 
+        COUNT(*) FILTER (WHERE second_month_balance = first_month_balance) / 
+        COUNT(*), 2) AS percent_unchanged
+FROM first_second_month_balances
+WHERE second_month_balance IS NOT NULL;
+
+-- 6: What percentage of customers increase their opening month’s positive closing balance by more than 5% in the following month?
+-- CTE: Tính số dư giao dịch hàng tháng cho mỗi khách hàng
+WITH monthly_balances AS (
+  SELECT 
+    customer_id, 
+    EXTRACT(MONTH FROM txn_date) AS month, 
+    SUM(CASE 
+      		WHEN txn_type = 'withdrawal' OR txn_type = 'purchase' THEN -txn_amount
+      		ELSE txn_amount 
+        END) AS monthly_balance
+  FROM customer_transactions
+  GROUP BY customer_id, EXTRACT(MONTH FROM txn_date)
+),
+-- CTE: Tính số dư tích lũy hàng tháng cho mỗi khách hàng
+cumulative_balances AS (
+  SELECT 
+    customer_id, 
+    month, 
+    SUM(monthly_balance) OVER (PARTITION BY customer_id ORDER BY month) AS closing_balance
+  FROM monthly_balances
+),
+-- CTE: Xác định số dư cuối tháng đầu tiên và tháng thứ hai của mỗi khách hàng
+first_second_month_balances AS (
+  SELECT 
+    customer_id, 
+    closing_balance AS first_month_balance,
+    LEAD(closing_balance, 1) OVER (PARTITION BY customer_id ORDER BY month) AS second_month_balance
+  FROM cumulative_balances
+  WHERE month IS NOT NULL
+)
+SELECT
+  ROUND(100.0 * 
+        COUNT(DISTINCT customer_id) 
+        	FILTER( WHERE(100 * (second_month_balance-first_month_balance) / first_month_balance) < 5) 
+        / COUNT(DISTINCT customer_id), 2) 
+        as increase_5_percent
+FROM first_second_month_balances
+where first_month_balance > 0
+
