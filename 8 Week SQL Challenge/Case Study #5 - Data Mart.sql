@@ -125,3 +125,22 @@ SELECT
 FROM before_after_changes
 
 -- 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019 
+-- Part 1: How do the sale metrics for 4 weeks before and after compare with the previous years in 2018 and 2019?
+with before_after_changes AS (
+	SELECT 
+  		calendar_year,
+        SUM(CASE WHEN week_number BETWEEN 21 AND 24 THEN sales ELSE 0 END) AS total_sales_before,
+        SUM(CASE WHEN week_number BETWEEN 25 AND 28 THEN sales ELSE 0 END) AS total_sales_after
+    FROM clean_weekly_sales
+  	where calendar_year BETWEEN 2018 and 2020
+  	GROUP by calendar_year
+)
+SELECT 
+  calendar_year,
+  total_sales_before AS total_sales_4_weeks_before,
+  total_sales_after as total_sales_4_weeks_after,
+  total_sales_after - total_sales_before AS sales_variance, 
+  ROUND(100.0 * (total_sales_after - total_sales_before) / total_sales_before, 2) AS variance_percent
+FROM before_after_changes
+GROUP by calendar_year, total_sales_before, total_sales_after
+
