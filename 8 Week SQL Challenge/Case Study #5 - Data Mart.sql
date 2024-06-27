@@ -94,3 +94,34 @@ SELECT
 FROM clean_weekly_sales
 GROUP BY calendar_year, platform
 ORDER BY calendar_year, platform
+
+-- C. Before & After Analysis 
+-- 1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales? 
+with before_after_changes AS (
+	SELECT 
+        SUM(CASE WHEN week_number BETWEEN 21 AND 24 AND calendar_year = 2020 THEN sales ELSE 0 END) AS total_sales_before,
+        SUM(CASE WHEN week_number BETWEEN 25 AND 28 AND calendar_year = 2020 THEN sales ELSE 0 END) AS total_sales_after
+    FROM clean_weekly_sales
+)
+SELECT 
+  total_sales_before AS total_sales_4_weeks_before,
+  total_sales_after as total_sales_4_weeks_after,
+  total_sales_after - total_sales_before AS sales_variance, 
+  ROUND(100.0 * (total_sales_after - total_sales_before) / total_sales_before, 2) AS variance_percent
+FROM before_after_changes
+
+-- 2. What about the entire 12 weeks before and after? 
+with before_after_changes AS (
+	SELECT 
+        SUM(CASE WHEN week_number BETWEEN 13 AND 24 AND calendar_year = 2020 THEN sales ELSE 0 END) AS total_sales_before,
+        SUM(CASE WHEN week_number BETWEEN 25 AND 37 AND calendar_year = 2020 THEN sales ELSE 0 END) AS total_sales_after
+    FROM clean_weekly_sales
+)
+SELECT 
+  total_sales_before AS total_sales_4_weeks_before,
+  total_sales_after as total_sales_4_weeks_after,
+  total_sales_after - total_sales_before AS sales_variance, 
+  ROUND(100.0 * (total_sales_after - total_sales_before) / total_sales_before, 2) AS variance_percent
+FROM before_after_changes
+
+-- 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019 
