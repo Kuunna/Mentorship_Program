@@ -1,24 +1,54 @@
 -- A. Data Exploration and Cleansing
 -- 1. Update the fresh_segments.interest_metrics table by modifying the month_year column to be a date data type with the start of the month
-
+ALTER TABLE interest_metrics ADD COLUMN month_year_temp DATE
+UPDATE interest_metrics SET month_year_temp = to_date(month_year, 'MM-YYYY')
+-- Thay đổi kiểu dữ liệu của cột month_year sang DATE
+ALTER TABLE interest_metrics ALTER COLUMN month_year TYPE DATE USING NULL
+UPDATE interest_metrics SET month_year = month_year_temp
+ALTER TABLE interest_metrics DROP COLUMN month_year_temp 
 
 -- 2. What is count of records in the fresh_segments.interest_metrics for each month_year value sorted in chronological order (earliest to latest) with the null values appearing first?
-
+SELECT month_year, 
+	COUNT(*)
+FROM interest_metrics
+GROUP BY month_year
+ORDER BY month_year NULLS FIRST
 
 -- 3. What do you think we should do with these null values in the fresh_segments.interest_metrics? 
-
+DELETE FROM interest_metrics
+WHERE interest_id IS NULL
 
 -- 4. How many interest_id values exist in the fresh_segments.interest_metrics table but not in the fresh_segments.interest_map table? What about the other way around? 
+ALTER TABLE interest_metrics ADD COLUMN interest_id_temp INTEGER;
+UPDATE interest_metrics SET interest_id_temp = CAST(interest_id AS INTEGER);
+ALTER TABLE interest_metrics DROP COLUMN interest_id;
+ALTER TABLE interest_metrics RENAME COLUMN interest_id_temp TO interest_id;
 
+SELECT 
+  COUNT(DISTINCT map.id) AS map_id_count,
+  COUNT(DISTINCT metrics.interest_id) AS metrics_id_count,
+  SUM(CASE WHEN map.id is NULL THEN 1 END) AS not_in_metric,
+  SUM(CASE WHEN metrics.interest_id is NULL THEN 1 END) AS not_in_map
+FROM interest_map map
+FULL JOIN interest_metrics metrics ON metrics.interest_id = map.id
 
 -- 5. Summarise the id values in the fresh_segments.interest_map by its total record count in this table.
-
+SELECT id, COUNT(*)
+FROM interest_map map
+JOIN interest_metrics metrics ON map.id = metrics.interest_id
+GROUP BY id
+ORDER BY count DESC, ID
 
 -- 6. What sort of table join should we perform for our analysis and why? Check your logic by checking the rows where 'interest_id = 21246' in your joined output and include all columns from fresh_segments.interest_metrics and all columns from fresh_segments.interest_map except from the id column. 
-
-
--- 7. Are there any records in your joined table where the month_year value is before the created_at value from the fresh_segments.interest_map table? Do you think these values are valid and why? 
-
+SELECT 
+  metrics.*, 
+  map.interest_name, 
+  map.interest_summary, 
+  map.created_at, 
+  map.last_modified
+FROM interest_map map
+FULL OUTER JOIN interest_metrics metrics ON metrics.interest_id = map.id
+WHERE metrics.interest_id = 21246 OR map.id = 21246
 
 -- B. Interest Analysis
 -- 1. Which interests have been present in all month_year dates in our dataset?
