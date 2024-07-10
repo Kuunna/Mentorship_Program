@@ -1,3 +1,5 @@
+![Screenshot 2024-07-10 220301](https://github.com/Kuunna/Mentorship_Program/assets/85633982/5a9104dc-b73e-421b-85ac-b7ff50ab83ad)
+
 # 1. Create table
 ```ruby
 CREATE TABLE color (
