@@ -1,4 +1,5 @@
 # 1. Create table
+```
 CREATE TABLE color (
     id INT PRIMARY KEY,
     name NVARCHAR(50) NOT NULL,
@@ -62,9 +63,10 @@ INSERT INTO clothing_order (id, customer_id, clothing_id, items, order_date) VAL
 (2, 2, 2, 1, '2023-06-02'),
 (3, 3, 3, 1, '2023-06-03'),
 (4, 4, 4, 1, '2023-06-04');
-
+```
 
 # 2. List All Clothing Items
+```
 WITH cu_favorite_color AS (
 	SELECT cu.id, cu.first_name, cu.last_name, cl.name AS favorite_color
 	FROM customer cu
@@ -77,17 +79,21 @@ JOIN customer cu ON cu.favorite_color_id = cl.id
 JOIN clothing_order co ON co.customer_id = cu.id AND co.clothing_id = c.id
 JOIN cu_favorite_color cfc ON cfc.id = cu.id
 ORDER BY cl.name
-
+```
 
 # 3. Get All Non-Buying Customers
+```
 SELECT cu.last_name, cu.first_name, cl.name AS favorite_color
 FROM customer cu
 LEFT JOIN clothing_order co ON cu.id = co.customer_id
 JOIN color cl ON cu.favorite_color_id = cl.id
 WHERE co.id IS NULL;
+```
 
 # 4. Select All Main Categories and Their Subcategories
+```
 SELECT c1.name AS category, c2.name AS subcategory
 FROM category c1
 LEFT JOIN category c2 ON c1.id = c2.parent_id
 WHERE c1.parent_id IS NULL
+```
