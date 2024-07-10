@@ -1,11 +1,15 @@
 -- A. Data Exploration and Cleansing
 -- 1. Update the fresh_segments.interest_metrics table by modifying the month_year column to be a date data type with the start of the month
-ALTER TABLE interest_metrics ADD COLUMN month_year_temp DATE
-UPDATE interest_metrics SET month_year_temp = to_date(month_year, 'MM-YYYY')
--- Thay đổi kiểu dữ liệu của cột month_year sang DATE
-ALTER TABLE interest_metrics ALTER COLUMN month_year TYPE DATE USING NULL
-UPDATE interest_metrics SET month_year = month_year_temp
-ALTER TABLE interest_metrics DROP COLUMN month_year_temp 
+ALTER TABLE interest_metrics
+ALTER COLUMN month_year VARCHAR(10)
+
+UPDATE interest_metrics
+SET month_year =  CONVERT(DATE, '01-' + month_year, 105)
+
+ALTER TABLE interest_metrics
+ALTER COLUMN month_year DATE;
+
+SELECT * FROM fresh_segments.dbo.interest_metrics;
 
 -- 2. What is count of records in the fresh_segments.interest_metrics for each month_year value sorted in chronological order (earliest to latest) with the null values appearing first?
 SELECT month_year, 
@@ -14,7 +18,12 @@ FROM interest_metrics
 GROUP BY month_year
 ORDER BY month_year NULLS FIRST
 
--- 3. What do you think we should do with these null values in the fresh_segments.interest_metrics? 
+-- 3. What do you think we should do with these null values in the fresh_segments.interest_metrics?
+SELECT *
+FROM interest_metrics
+WHERE month_year IS NULL
+ORDER BY interest_id DESC; 
+
 DELETE FROM interest_metrics
 WHERE interest_id IS NULL
 
@@ -33,11 +42,8 @@ FROM interest_map map
 FULL JOIN interest_metrics metrics ON metrics.interest_id = map.id
 
 -- 5. Summarise the id values in the fresh_segments.interest_map by its total record count in this table.
-SELECT id, COUNT(*)
-FROM interest_map map
-JOIN interest_metrics metrics ON map.id = metrics.interest_id
-GROUP BY id
-ORDER BY count DESC, ID
+SELECT COUNT(*) AS map_id_count
+FROM interest_map;
 
 -- 6. What sort of table join should we perform for our analysis and why? Check your logic by checking the rows where 'interest_id = 21246' in your joined output and include all columns from fresh_segments.interest_metrics and all columns from fresh_segments.interest_map except from the id column. 
 SELECT 
@@ -75,8 +81,9 @@ interest_count AS (
 )
 SELECT *,
   ROUND(100 * SUM(interests) OVER (ORDER BY total_months DESC) 
-     / (SUM(interests) OVER ()),2) AS cumulative_percentage
+        / (SUM(interests) OVER ()),2) AS cumulative_percentage
 FROM interest_count
+
 -- 3. If we were to remove all interest_id values which are lower than the total_months value we found in the previous question - how many total data points would we be removing? 
 WITH interest_months AS (
   SELECT
@@ -105,7 +112,6 @@ FROM interest_metrics
 WHERE interest_id NOT IN (
   SELECT interest_id
   FROM interest_metrics
-  WHERE interest_id IS NOT NULL
   GROUP BY interest_id
   HAVING COUNT(DISTINCT month_year) < 6)
 )
@@ -120,10 +126,43 @@ ORDER BY month_year
 
 
 -- 2. Which 5 interests had the lowest average ranking value?
-
+WITH interest_metrics_edited AS (
+SELECT *
+FROM interest_metrics
+WHERE interest_id NOT IN (
+  SELECT interest_id
+  FROM interest_metrics
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) < 6)
+)
+SELECT 
+  metrics.interest_id,
+  map.interest_name,
+  Round(AVG(1.0 * metrics.ranking), 2) AS avg_ranking
+FROM interest_metrics_edited metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+GROUP BY metrics.interest_id, map.interest_name
+ORDER BY avg_ranking
+LIMIT 5
 
 -- 3. Which 5 interests had the largest standard deviation in their percentile_ranking value?
-
+WITH interest_metrics_edited AS (
+  SELECT *
+  FROM interest_metrics
+  WHERE interest_id NOT IN (
+    SELECT interest_id
+    FROM interest_metrics
+    GROUP BY interest_id
+    HAVING COUNT(DISTINCT month_year) < 6)
+)
+SELECT 
+  DISTINCT metrics.interest_id,
+  map.interest_name,
+  ROUND(CAST(STDDEV_SAMP(metrics.percentile_ranking) OVER (PARTITION BY metrics.interest_id) AS NUMERIC), 2) AS std_percentile_ranking
+FROM interest_metrics_edited metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+ORDER BY std_percentile_ranking DESC
+LIMIT 5
 
 -- 4. For the 5 interests found in the previous question - what was minimum and maximum percentile_ranking values for each interest and its corresponding year_month value? Can you describe what is happening for these 5 interests?
 
