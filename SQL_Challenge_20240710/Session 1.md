@@ -1,5 +1,5 @@
 # 1. Create table
-```
+```ruby
 CREATE TABLE color (
     id INT PRIMARY KEY,
     name NVARCHAR(50) NOT NULL,
@@ -66,7 +66,7 @@ INSERT INTO clothing_order (id, customer_id, clothing_id, items, order_date) VAL
 ```
 
 # 2. List All Clothing Items
-```
+```ruby
 WITH cu_favorite_color AS (
 	SELECT cu.id, cu.first_name, cu.last_name, cl.name AS favorite_color
 	FROM customer cu
@@ -82,7 +82,7 @@ ORDER BY cl.name
 ```
 
 # 3. Get All Non-Buying Customers
-```
+```ruby
 SELECT cu.last_name, cu.first_name, cl.name AS favorite_color
 FROM customer cu
 LEFT JOIN clothing_order co ON cu.id = co.customer_id
@@ -91,7 +91,7 @@ WHERE co.id IS NULL;
 ```
 
 # 4. Select All Main Categories and Their Subcategories
-```
+```ruby
 SELECT c1.name AS category, c2.name AS subcategory
 FROM category c1
 LEFT JOIN category c2 ON c1.id = c2.parent_id
