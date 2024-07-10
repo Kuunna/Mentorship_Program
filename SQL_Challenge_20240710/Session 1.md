@@ -1,6 +1,6 @@
 ![Screenshot 2024-07-10 220301](https://github.com/Kuunna/Mentorship_Program/assets/85633982/5a9104dc-b73e-421b-85ac-b7ff50ab83ad)
 
-** 1. Create table **
+**1. Create table**
 ```ruby
 CREATE TABLE color (
     id INT PRIMARY KEY,
@@ -66,8 +66,24 @@ INSERT INTO clothing_order (id, customer_id, clothing_id, items, order_date) VAL
 (3, 3, 3, 1, '2023-06-03'),
 (4, 4, 4, 1, '2023-06-04');
 ```
+Table customer 
 
-** 2. List All Clothing Items **
+![Screenshot 2024-07-10 230437](https://github.com/Kuunna/Mentorship_Program/assets/85633982/fd2d7203-efdc-44bc-9707-ab50bfdafeb0)
+
+Table clothing_order 
+
+![Screenshot 2024-07-10 230444](https://github.com/Kuunna/Mentorship_Program/assets/85633982/637b34ce-a5d1-477f-80fb-22e119ac8620)
+
+Table clothing 
+
+![Screenshot 2024-07-10 230758](https://github.com/Kuunna/Mentorship_Program/assets/85633982/2d999796-713f-4ad1-8972-ad35c33ae191)
+
+Table category 
+
+![Screenshot 2024-07-10 230457](https://github.com/Kuunna/Mentorship_Program/assets/85633982/2f0c54db-5c64-4263-9e7a-edd029129f8b)
+
+
+**2. List All Clothing Items**
 ```ruby
 WITH cu_favorite_color AS (
 	SELECT cu.id, cu.first_name, cu.last_name, cl.name AS favorite_color
@@ -84,7 +100,7 @@ ORDER BY cl.name
 ```
 ![Screenshot 2024-07-10 225836](https://github.com/Kuunna/Mentorship_Program/assets/85633982/f6e68a98-0bf2-423d-b0d2-ad31a9d55790)
 
-** 3. Get All Non-Buying Customers **
+**3. Get All Non-Buying Customers**
 ```ruby
 SELECT cu.last_name, cu.first_name, cl.name AS favorite_color
 FROM customer cu
@@ -94,7 +110,7 @@ WHERE co.id IS NULL;
 ```
 ![Screenshot 2024-07-10 225850](https://github.com/Kuunna/Mentorship_Program/assets/85633982/fc25a9c0-2efd-49ed-b1d4-be771492a147)
 
-** 4. Select All Main Categories and Their Subcategories **
+**4. Select All Main Categories and Their Subcategories**
 ```ruby
 SELECT c1.name AS category, c2.name AS subcategory
 FROM category c1
