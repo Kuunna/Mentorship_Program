@@ -1,3 +1,10 @@
+# 📕 SQL Challenge - Session 3
+<p align="center">
+<img src="https://github.com/Kuunna/Mentorship_Program/assets/85633982/65db8e25-7497-4232-86fd-e7ba48a7117b" align="center" width="1000" height="750" >
+
+## 🚀 Table of Contents
+**1. Create table**
+```TSQL
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
@@ -99,15 +106,22 @@ INSERT INTO channels (id, channel_name) VALUES
 (3, 'Instagram'),
 (4, 'Organic Search'),
 (5, 'Referral');
+```
 
---2. List the Top 3 Most Expensive Orders
-
+##❓ Case Study Questions
+**2. List the Top 3 Most Expensive Orders**
+```TSQL
 SELECT TOP 3 order_id, customer_id, total_amount
 FROM orders
 ORDER BY total_amount DESC
+```
 
 --3. Compute Deltas Between Consecutive Orders
+```TSQL
 
+```
 --4. Compute the Running Total of Purchases per Customer
+```TSQL
 
+```
 
