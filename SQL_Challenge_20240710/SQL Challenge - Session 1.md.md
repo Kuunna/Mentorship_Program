@@ -1,7 +1,10 @@
-![Screenshot 2024-07-10 220301](https://github.com/Kuunna/Mentorship_Program/assets/85633982/5a9104dc-b73e-421b-85ac-b7ff50ab83ad)
+# 📕 SQL Challenge - Session 1
+<p align="center">
+<img src="https://github.com/Kuunna/Mentorship_Program/assets/85633982/5a9104dc-b73e-421b-85ac-b7ff50ab83ad)" align="center" width="1000" height="560" >
 
+## 🚀 Table of Contents
 **1. Create table**
-```ruby
+```TSQL
 CREATE TABLE color (
     id INT PRIMARY KEY,
     name NVARCHAR(50) NOT NULL,
@@ -82,9 +85,10 @@ Table category
 
 ![Screenshot 2024-07-10 230457](https://github.com/Kuunna/Mentorship_Program/assets/85633982/2f0c54db-5c64-4263-9e7a-edd029129f8b)
 
+## ❓ Case Study Questions
 
 **2. List All Clothing Items**
-```ruby
+```TSQL
 WITH cu_favorite_color AS (
 	SELECT cu.id, cu.first_name, cu.last_name, cl.name AS favorite_color
 	FROM customer cu
@@ -101,7 +105,7 @@ ORDER BY cl.name
 ![Screenshot 2024-07-10 225836](https://github.com/Kuunna/Mentorship_Program/assets/85633982/f6e68a98-0bf2-423d-b0d2-ad31a9d55790)
 
 **3. Get All Non-Buying Customers**
-```ruby
+```TSQL
 SELECT cu.last_name, cu.first_name, cl.name AS favorite_color
 FROM customer cu
 LEFT JOIN clothing_order co ON cu.id = co.customer_id
@@ -111,7 +115,7 @@ WHERE co.id IS NULL;
 ![Screenshot 2024-07-10 225850](https://github.com/Kuunna/Mentorship_Program/assets/85633982/fc25a9c0-2efd-49ed-b1d4-be771492a147)
 
 **4. Select All Main Categories and Their Subcategories**
-```ruby
+```TSQL
 SELECT c1.name AS category, c2.name AS subcategory
 FROM category c1
 LEFT JOIN category c2 ON c1.id = c2.parent_id
