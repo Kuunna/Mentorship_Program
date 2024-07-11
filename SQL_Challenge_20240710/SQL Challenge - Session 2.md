@@ -66,7 +66,7 @@ Table runner_event
 
 ![Screenshot 2024-07-11 075203](https://github.com/Kuunna/Mentorship_Program/assets/85633982/db4df6d2-e47b-40f4-bcbb-61a9fd84a604)
 
-## ❓ Case Study Questions
+##❓ Case Study Questions
 
 **2. Organize Runners Into Groups**
 ```TSQL
