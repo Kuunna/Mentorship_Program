@@ -108,20 +108,59 @@ INSERT INTO channels (id, channel_name) VALUES
 (5, 'Referral');
 ```
 
-##❓ Case Study Questions
+## ❓ Case Study Questions
 **2. List the Top 3 Most Expensive Orders**
 ```TSQL
 SELECT TOP 3 order_id, customer_id, total_amount
 FROM orders
 ORDER BY total_amount DESC
 ```
+![Screenshot 2024-07-12 100232](https://github.com/user-attachments/assets/13652dfd-e2e9-45e3-a52d-d3e4214df087)
 
---3. Compute Deltas Between Consecutive Orders
+**3. Compute Deltas Between Consecutive Orders**
 ```TSQL
-
+WITH OrderRanks AS (
+    SELECT
+        customer_id,
+        order_id,
+        total_amount,
+        order_date,
+        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) AS order_rank
+    FROM orders
+),
+OrderDeltas AS (
+    SELECT
+        o1.order_id,
+        o1.customer_id,
+        o1.total_amount,
+        o2.total_amount AS previous_value,
+        o1.total_amount - o2.total_amount AS delta
+    FROM OrderRanks o1
+    LEFT JOIN OrderRanks o2
+    ON o1.customer_id = o2.customer_id AND o1.order_rank = o2.order_rank + 1
+)
+SELECT *
+FROM OrderDeltas
+ORDER BY customer_id, order_id
 ```
---4. Compute the Running Total of Purchases per Customer
+![Screenshot 2024-07-12 100252](https://github.com/user-attachments/assets/b608c61f-5a9b-44b2-8728-4add0dcc7ed0)
+
+**4. Compute the Running Total of Purchases per Customer**
 ```TSQL
-
+WITH RunningTotals AS (
+    SELECT
+        o.customer_id,
+        c.full_name,
+        o.order_id,
+        o.order_date,
+        o.total_amount,
+        SUM(o.total_amount) OVER (PARTITION BY o.customer_id ORDER BY o.order_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total
+    FROM orders o
+    JOIN customers c ON o.customer_id = c.customer_id
+)
+SELECT *
+FROM RunningTotals
+ORDER BY customer_id, order_date
 ```
+![Screenshot 2024-07-12 100307](https://github.com/user-attachments/assets/704fb60f-0c90-44aa-a8e6-e33e76b45f5e)
 
