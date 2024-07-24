@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 11:17:39 AM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDk6NTk6MzYgQU07MjkwMA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MTA6MDE6NTEgQU07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yMzswMzowNjo1OCBQTTtRdWVzdGlvbiAyIC0gQ2FsY3VsYXRlIHRoZSBzdW0gb2YgYWxsIG9kZCBudW1iZXJzLmZwcmc7MTA4OTU="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MTE6MTc6MzkgQU07MjsyOTk5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Calculate the sum of all prime numbers in the array.&quot;" newline="True"/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <declare name="i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+                <output expression="A[i]" newline="True"/>
+                <if expression="isPrime(A[i])=TRUE">
+                    <then>
+                        <output expression="&quot;isPrime&quot; &amp; A[i]" newline="True"/>
+                        <assign variable="sum" expression="sum + A[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Sum of all prime numbers in the array = &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+    <function name="isPrime" type="Boolean" variable="prime">
+        <parameters>
+            <parameter name="num" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="prime" type="Boolean" array="False" size=""/>
+            <assign variable="prime" expression="TRUE"/>
+            <if expression="num &lt; 2">
+                <then>
+                    <assign variable="prime" expression="FALSE"/>
+                </then>
+                <else>
+                    <declare name="i" type="Integer" array="False" size=""/>
+                    <for variable="i" start="2" end="sqrt(num)+1" direction="inc" step="1">
+                        <if expression="num % i == 0">
+                            <then>
+                                <assign variable="prime" expression="FALSE"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

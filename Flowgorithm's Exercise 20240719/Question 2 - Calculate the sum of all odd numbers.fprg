@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 10:01:44 AM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjM7MDM6MDY6NTggUE07MjkwNA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjM7MDM6MDg6MjIgUE07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yMzswMjozNjowOSBQTTtFeGVyY2lzZSAxLmZwcmc7NzQwNw=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MTA6MDE6NDQgQU07NDsyOTg5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Calculate the sum of all odd numbers in the array.&quot;" newline="True"/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <declare name="i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+                <if expression="A[i] % 2 != 0">
+                    <then>
+                        <assign variable="sum" expression="sum + A[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Sum of all odd numbers in the array A = &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

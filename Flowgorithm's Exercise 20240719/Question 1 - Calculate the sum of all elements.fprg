@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-23 03:05:18 PM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjM7MDI6MzY6MDkgUE07MjkwMg=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjM7MDM6MDU6MTggUE07MzszMDA5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Calculate the sum of all elements in the array."/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <declare name="i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+                <assign variable="sum" expression="sum + A[i]"/>
+            </for>
+            <output expression="&quot;Sum of all elements in the array A = &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

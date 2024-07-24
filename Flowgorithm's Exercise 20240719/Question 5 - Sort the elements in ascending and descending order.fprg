@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 01:31:11 PM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MTE6Mzg6NDMgQU07Mjg4OA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MTE6Mzg6NDYgQU07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yNDswOTo1OTozNiBBTTtRdWVzdGlvbiAzIC0gQ2FsY3VsYXRlIHRoZSBzdW0gb2YgYWxsIHByaW1lIG51bWJlcnMuZnByZzsxMTEzNw=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDE6MzE6MTEgUE07NDszMDAx"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Sort the elements in ascending and descending order.&quot;" newline="True"/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <declare name="i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+                <output expression="A[i] &amp; &quot;, &quot;" newline="False"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+            <call expression="ascendingSort(A, n)"/>
+            <output expression="&quot;Increasing order: &quot;" newline="False"/>
+            <call expression="printArray(A, n)"/>
+            <output expression="&quot; &quot;" newline="True"/>
+            <call expression="descendingShort(A, n)"/>
+            <output expression="&quot;Decreasing order: &quot;" newline="False"/>
+            <call expression="printArray(A, n)"/>
+        </body>
+    </function>
+    <function name="ascendingSort" type="None" variable="">
+        <parameters>
+            <parameter name="A" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, j" type="Integer" array="False" size=""/>
+            <for variable="i" start="n-1" end="0" direction="dec" step="1">
+                <for variable="j" start="1" end="i" direction="inc" step="1">
+                    <if expression="A[j-1] &gt; a[j]">
+                        <then>
+                            <assign variable="A[j-1]" expression="A[j-1] + A[j]"/>
+                            <assign variable="A[j]" expression="A[j-1] - A[j]"/>
+                            <assign variable="A[j-1]" expression="A[j-1] - A[j]"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="descendingShort" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, j" type="Integer" array="False" size=""/>
+            <for variable="i" start="n-1" end="0" direction="dec" step="1">
+                <for variable="j" start="1" end="i" direction="inc" step="1">
+                    <if expression="A[j-1] &lt; a[j]">
+                        <then>
+                            <assign variable="A[j-1]" expression="A[j-1] + A[j]"/>
+                            <assign variable="A[j]" expression="A[j-1] - A[j]"/>
+                            <assign variable="A[j-1]" expression="A[j-1] - A[j]"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="a[i] &amp; &quot;, &quot;" newline="False"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
