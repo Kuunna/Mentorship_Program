@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-25 03:27:25 PM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6Mjc6MTkgUE07MjkxMA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6MzM6NDUgUE07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yMzswMjozNjowOSBQTTtRdWVzdGlvbiAxIC0gQ2FsY3VsYXRlIHRoZSBzdW0gb2YgYWxsIGVsZW1lbnRzLmZwcmc7MTA2NzY="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MDI6NTc6NDEgUE07Mjt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yNDswODozNjoxMiBQTTtRdWVzdGlvbiAyIC0gRGVsZXRlIGFuIGVsZW1lbnQgYXQgYSBnaXZlbiBwb3NpdGlvbiBpbiB0aGUgYXJyYXkuZnByZzsxMjIwNA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MDM6MDI6MjUgUE07Mzt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yNDsxMToxODo0MCBBTTtRdWVzdGlvbiA0IC0gRmluZCB0aGUgbWluaW11bSBhbmQgbWF4aW11bSB2YWx1ZXMuZnByZzsxMDg5Mg=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MDM6Mjc6MjUgUE07MjszMDEy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Find the element that appears the most in the array&quot;" newline="True"/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+            </for>
+            <output expression="&quot;Your array is: &quot;" newline="False"/>
+            <call expression="printArray(a, n)"/>
+            <call expression="findMostFrequent(a, n)"/>
+        </body>
+    </function>
+    <function name="findMostFrequent" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, max, maxCount, mostFrequent" type="Integer" array="False" size=""/>
+            <assign variable="max" expression="a[0]"/>
+            <assign variable="maxCount" expression="0"/>
+            <assign variable="mostFrequent" expression="a[0]"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="a[i] &gt; max">
+                    <then>
+                        <assign variable="max" expression="a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <declare name="count" type="Integer" array="True" size="max+1"/>
+            <for variable="i" start="0" end="max" direction="inc" step="1">
+                <assign variable="count[i]" expression="0"/>
+            </for>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="count[a[i]]" expression="count[a[i]] + 1"/>
+            </for>
+            <for variable="i" start="0" end="max" direction="inc" step="1">
+                <if expression="count[a[i]] &gt; maxCount">
+                    <then>
+                        <assign variable="maxCount" expression="Count[i]"/>
+                        <assign variable="mostFrequent" expression="i"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;The most frequent element is: &quot;" newline="False"/>
+            <for variable="i" start="0" end="max" direction="inc" step="1">
+                <if expression="count[i] = maxCount">
+                    <then>
+                        <output expression="i &amp; &quot; &quot;" newline="False"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot; with &quot; &amp; maxCount &amp; &quot; occurrences.&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="i != n - 1">
+                    <then>
+                        <output expression="a[i] &amp; &quot;, &quot;" newline="False"/>
+                    </then>
+                    <else>
+                        <output expression="a[i]" newline="True"/>
+                    </else>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
