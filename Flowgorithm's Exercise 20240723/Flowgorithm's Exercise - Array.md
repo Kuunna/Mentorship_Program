@@ -8,9 +8,18 @@
 ### 1. Find the element that appears the most in the array
 Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Find the element that appears the most in the array
 
+**_findMostFrequet(interger a, integer n)_**: Find the element that appears the most in the array
+
+<img alt="Question 1 - findMostFrequet" src="https://github.com/user-attachments/assets/9b8e47c2-f53a-471e-8639-9c6e1752021a">
+
+**_printArray(Integer Array a, Integer n)_**: Print all elements of an array.
+
+<img alt="Question 2 - printArray" src="https://github.com/user-attachments/assets/95f469ec-33a7-4bd4-a8f8-3f21200517d3">
+
+
 **_Main Function_**
 
-<img alt="Question 1 - Main" src="">
+<img alt="Question 1 - Main" src="https://github.com/user-attachments/assets/49732ed8-53e0-4db0-a9fd-8bfe53ccd630">
 
 ### 2. Delete an element at a given position in the array
 Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Delete an element at a given position in the array.
