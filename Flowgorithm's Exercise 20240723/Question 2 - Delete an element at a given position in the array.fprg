@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-25 12:31:15 PM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6MzY6MTIgUE07MjkwMw=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6MzY6MTYgUE07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yNDswODoyNzoxOSBQTTtRdWVzdGlvbiA2IC0gRmluZCB0aGUgZWxlbWVudCB0aGF0IGFwcGVhcnMgdGhlIG1vc3QgaW4gdGhlIGFycmF5LmZwcmc7MTIzNDM="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MTE6MTc6MDggQU07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yMzswMjozNjowOSBQTTtRdWVzdGlvbiAxIC0gQ2FsY3VsYXRlIHRoZSBzdW0gb2YgYWxsIGVsZW1lbnRzLmZwcmc7MTA2NTc="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MTI6Mjc6NDMgUE07MTA7VGhpbmtib29rO0RFU0tUT1AtTTg0VDNWRTsyMDI0LTA3LTI1OzA5OjQ3OjU4IEFNO1F1ZXN0aW9uIDIgLSBEZWxldGUgZWxlbWVudCBhcnJheS5mcHJnOzk5Mjg="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjU7MTI6MzE6MTUgUE07NDszMDA4"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Given an integer n, create an array of 10 elements, each randomly ranging from 0 to 9. Delete an element at a given position in the array&quot;" newline="True"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter the size of the array (n): &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="Random(10)"/>
+            </for>
+            <output expression="&quot;Original array: &quot;" newline="False"/>
+            <call expression="printArray(a, n)"/>
+            <output expression="&quot;Enter the position to delete: &quot;" newline="True"/>
+            <declare name="index" type="Integer" array="False" size=""/>
+            <input variable="index"/>
+            <call expression="deleteElement(a, n, index)"/>
+        </body>
+    </function>
+    <function name="deleteElement" type="None" variable="a">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+            <parameter name="index" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <while expression="index &lt; 0 or index &gt;= n">
+                <output expression="&quot;The location to be deleted is invalid&quot;" newline="True"/>
+                <output expression="&quot;Enter position of element you want to delete: &quot;" newline="True"/>
+                <input variable="index"/>
+            </while>
+            <declare name="newA" type="Integer" array="True" size="n-1"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="index - 1" direction="inc" step="1">
+                <assign variable="newA[i]" expression="a[i]"/>
+            </for>
+            <for variable="i" start="index" end="n - 2" direction="inc" step="1">
+                <assign variable="newA[i]" expression="a[i+1]"/>
+            </for>
+            <output expression="&quot;Array after deletion: &quot;" newline="False"/>
+            <call expression="printArray(newA, n-1)"/>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="i != n - 1">
+                    <then>
+                        <output expression="a[i] &amp; &quot;, &quot;" newline="False"/>
+                    </then>
+                    <else>
+                        <output expression="a[i]" newline="True"/>
+                    </else>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

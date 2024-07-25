@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="truon"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 08:35:50 PM"/>
+        <attribute name="created" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6Mjc6MTkgUE07MjkxMA=="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6MzM6NDUgUE07MTt0cnVvbjtERVNLVE9QLVRVN0swNkI7MjAyNC0wNy0yMzswMjozNjowOSBQTTtRdWVzdGlvbiAxIC0gQ2FsY3VsYXRlIHRoZSBzdW0gb2YgYWxsIGVsZW1lbnRzLmZwcmc7MTA2NzY="/>
+        <attribute name="edited" value="dHJ1b247REVTS1RPUC1UVTdLMDZCOzIwMjQtMDctMjQ7MDg6MzU6NTAgUE07MTszMDEy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Find the element that appears the most in the array&quot;" newline="True"/>
+            <output expression="&quot;Enter number n = &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="A" type="Integer" array="True" size="n"/>
+            <declare name="i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="A[i]" expression="Random(10)"/>
+                <output expression="A[i] &amp; &quot; &quot;" newline="False"/>
+                <assign variable="sum" expression="sum + A[i]"/>
+            </for>
+            <output expression="&quot;&quot;" newline="True"/>
+            <output expression="&quot;The element that appears the most in the array is &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
