@@ -112,6 +112,21 @@ public static string IntToRoman(int num)
 }
 ```
 
+- **_IsInt(string input)_**: Check Decimal number
+```csharp
+public static bool IsInt(string input) {
+    int number;
+    return int.TryParse(input, out number);
+}
+```
+
+- **_IsRoman(string input_**: Check Roman number
+```csharp
+public static bool IsRoman(string input) {
+    return Regex.IsMatch(input.ToUpper(), @"^[IVXLCDM]+$");
+}
+```
+
 - **_Main Function_**
 ```csharp
 using System;
