@@ -2,7 +2,7 @@
 
 ## 📚 Table of Contents
 - [Question 1 - Find the element that appears the most in the array](#1-find-the-element-that-appears-the-most-in-the-array)
-- [Question 2 - Convert Roman numbers to Decimals and vice versa](#2-convert-roman-mumbers-to-decimals-and-vice-versa)
+- [Question 2 - Convert Roman numbers to Decimals and vice versa](#2-convert-roman-numbers-to-decimals-and-vice-versa)
 
 ### 1. Find the element that appears the most in the array
 Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Find the element that appears the most in the array
@@ -53,7 +53,7 @@ public class Program
 }
 ```
 
-
+<img alt="Question 1 - Main" src="https://github.com/user-attachments/assets/18b90129-1664-4693-8f3c-a4b3d91996d9">
 
 
 ### 2. Convert Roman numbers to Decimals and vice versa
@@ -122,59 +122,6 @@ namespace RomanToInteger
 {
     internal class Program
     {
-        public static int RomanToInt(string s)
-        {
-            var romanNumerals = new Dictionary<char, int>
-            {
-                {'I', 1},   {'V', 5},
-                {'X', 10},  {'L', 50},
-                {'C', 100}, {'D', 500},
-                {'M', 1000}
-            };
-
-            var result = 0;
-            var prevValue = 0;
-
-            for (var i = s.Length - 1; i >= 0; i--)
-            {
-                var currentValue = romanNumerals[s[i]];
-                if (currentValue < prevValue)
-                    result -= currentValue;
-                else
-                    result += currentValue;
-                prevValue = currentValue;
-            }
-
-            return result;
-        }
-        public static string IntToRoman(int num)
-        {
-            var romanNumerals = new Dictionary<int, string>
-            {
-                {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
-                {100,  "C"}, {90,  "XC"}, {50,  "L"}, {40,  "XL"},
-                {10,   "X"}, {9,   "IX"}, {5,   "V"}, {4,   "IV"},
-                {1,    "I"}
-            };
-            var result = "";
-            foreach (var item in romanNumerals)
-            {
-                while (num >= item.Key)
-                {
-                    result += item.Value;
-                    num -= item.Key;
-                }
-            }
-            return result;
-        }
-        public static bool IsInt(string input) {
-            int number;
-            return int.TryParse(input, out number);
-        }
-
-        public static bool IsRoman(string input) {
-            return Regex.IsMatch(input.ToUpper(), @"^[IVXLCDM]+$");
-        }
         public static void Main()
         {
             string input;
@@ -202,3 +149,5 @@ namespace RomanToInteger
     }
 }
 ```
+
+<img alt="Question 2 - Main" src="https://github.com/user-attachments/assets/8f70f561-2ccd-4ba8-ade8-0959b2161937">
