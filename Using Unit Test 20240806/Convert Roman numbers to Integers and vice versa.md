@@ -1,8 +1,8 @@
 # Flowgorithm's Exercise - Array
 
 ## 📚 Table of Contents
-- [Unit Test - Convert Roman numbers to Integers and vice versa](#1-unit-test-for-convert-roman-mumbers-to-decimals-and-vice-versa)
-- [Convert Roman numbers to Integers and vice versa](#2-convert-roman-mumbers-to-decimals-and-vice-versa)
+- [Unit Test - Convert Roman numbers to Integers and vice versa](#1-unit-test-for-convert-roman-numbers-to-integers-and-vice-versa)
+- [Convert Roman numbers to Integers and vice versa](#2-convert-roman-numbers-to-integers-and-vice-versa)
 
 
 ### 1. Unit Test for Convert Roman numbers to Integers and vice versa
@@ -63,9 +63,9 @@ namespace RomanToIntegerTest
     }
 }
 ```
+<img alt="Unit test" src="https://github.com/user-attachments/assets/c0f1614d-d624-47c5-9cb4-76747043f8a2">
 
-
-### 2. Convert Roman numbers to Decimals and vice versa
+### 2. Convert Roman numbers to integers and vice versa
 Given an decimals number (int n) or roman number (string n). Convert Roman numbers to Decimals and vice versa
 
 - **_RomanToInt(string s)_**: Convert Roman to Decimals numbers.
@@ -123,13 +123,8 @@ public static string IntToRoman(int num)
 
 - **_IsInt(string input)_**: Check if input is integer type or not?.
 ```csharp
-public static bool IsInt(string input)
-{
+public static bool IsInt(string input){
     return int.TryParse(input, out int number) && number > 0;
-}
-
-public static bool IsRoman(string input) {
-    return Regex.IsMatch(input.ToUpper(), @"^[IVXLCDM]+$");
 }
 ```
 
@@ -187,8 +182,7 @@ namespace RomanToInteger
             var result = "";
             foreach (var item in romanNumerals)
             {
-                while (num >= item.Key)
-                {
+                while (num >= item.Key){
                     result += item.Value;
                     num -= item.Key;
                 }
@@ -230,3 +224,5 @@ namespace RomanToInteger
     }
 }
 ```
+
+<img alt="Main" src="https://github.com/user-attachments/assets/8f70f561-2ccd-4ba8-ade8-0959b2161937">
