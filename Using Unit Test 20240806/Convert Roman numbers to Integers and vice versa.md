@@ -143,7 +143,7 @@ using System.Text.RegularExpressions;
 
 namespace RomanToInteger
 {
-    internal class Program
+    public class Program
     {
         public static int RomanToInt(string s)
         {
