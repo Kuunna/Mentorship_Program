@@ -1,6 +1,3 @@
-
-
-
 namespace Digital_Assest_Management
 {
     [TestClass]
@@ -17,7 +14,7 @@ namespace Digital_Assest_Management
             return user;
         }
         [TestMethod]
-        public void Test_User_Can_Add_And_Remove_Drive()
+        public void User_Can_Add_And_Remove_Drive()
         {
             var user = InitUserData();
             Assert.AreEqual(2, user.Drives.Count);
@@ -26,13 +23,13 @@ namespace Digital_Assest_Management
             Assert.IsFalse(user.Drives.Any(d => d.DriveId == 1));
         }
         [TestMethod]
-        public void Test_User_HasMultiple_Drives()
+        public void User_HasMultiple_Drives()
         {
             User user = InitUserData();
             Assert.AreEqual(2, user.Drives.Count);
         }
         [TestMethod]
-        public void Test_User_HasMultiple_Drivers_With_Folders()
+        public void User_HasMultiple_Drivers_With_Folders()
         {
             var user = new User();
             user.Name = "John";
@@ -54,7 +51,7 @@ namespace Digital_Assest_Management
             Assert.AreEqual(2, user.Drives[1].Folders.Count);
         }
         [TestMethod]
-        public void Test_User_HasPermission_ForDrive()
+        public void User_HasPermission_ForDrive()
         {
             var user = InitUserData();
             user.GrantPermission(targetId: 1, permissionType: "Admin", targetType: "Drive");
@@ -62,13 +59,13 @@ namespace Digital_Assest_Management
             Assert.IsTrue(user.HasPermission(targetId: 1, permissionType: "Admin", targetType: "Drive"));
         }
         [TestMethod]
-        public void Test_User_HasNoPermission_ForDrive()
+        public void User_HasNoPermission_ForDrive()
         {
             var user = InitUserData();
             Assert.IsFalse(user.HasPermission(targetId: 3, permissionType: "Admin", targetType: "Drive"));
         }
         [TestMethod]
-        public void Test_User_CanRemove_Permission_ForDrive()
+        public void User_CanRemove_Permission_ForDrive()
         {
             var user = InitUserData();
             user.GrantPermission(targetId: 1, permissionType: "Admin", targetType: "Drive");
@@ -78,7 +75,7 @@ namespace Digital_Assest_Management
             Assert.IsFalse(user.HasPermission(targetId: 1, permissionType: "Admin", targetType: "Drive"));
         }
         [TestMethod]
-        public void Test_User_CanAssign_Folder_And_File_Permission()
+        public void User_CanAssign_Folder_And_File_Permission()
         {
             var user = InitUserData();
 
@@ -92,7 +89,7 @@ namespace Digital_Assest_Management
 
 
         [TestMethod]
-        public void Test_Drive_Can_Add_And_Remove_Folder()
+        public void Drive_Can_Add_And_Remove_Folder()
         {
             var user = InitUserData();
             var folder = new Folder { FolderId = 1, FolderName = "TestFolder" };
@@ -104,7 +101,7 @@ namespace Digital_Assest_Management
             Assert.IsFalse(user.Drives[0].Folders.Any(f => f.FolderId == 1));
         }
         [TestMethod]
-        public void Test_Drive_Can_Add_And_Remove_File()
+        public void Drive_Can_Add_And_Remove_File()
         {
             var user = InitUserData();
             var file = new File { FileId = 1, FileName = "TestFile" };
@@ -116,7 +113,7 @@ namespace Digital_Assest_Management
             Assert.IsFalse(user.Drives[0].Files.Any(f => f.FileId == 1));
         }
         [TestMethod]
-        public void Test_Drive_HasMultiple_Folder_And_File()
+        public void Drive_HasMultiple_Folder_And_File()
         {
             var user = InitUserData();
 
@@ -129,7 +126,7 @@ namespace Digital_Assest_Management
             Assert.AreEqual(2, user.Drives[0].Files.Count);
         }
         [TestMethod]
-        public void Test_Drive_HasMultiple_Folders()
+        public void Drive_HasMultiple_Folders()
         {
             var Drive = new Drive { DriveId = 1, DriveName = "GoogleDrive" };
 
@@ -139,7 +136,7 @@ namespace Digital_Assest_Management
             Assert.AreEqual(2, Drive.Folders.Count);
         }
         [TestMethod]
-        public void Test_Drive_HasMultiple_Files()
+        public void Drive_HasMultiple_Files()
         {
             var Drive = new Drive { DriveId = 1, DriveName = "GoogleDrive" };
 
@@ -153,7 +150,7 @@ namespace Digital_Assest_Management
 
 
         [TestMethod]
-        public void Test_Folder_Can_Add_And_Remove_Folder()
+        public void Folder_Can_Add_And_Remove_Folder()
         {
             var user = InitUserData();
             var subFolder = new Folder { FolderId = 1, FolderName = "TestFolder" };
@@ -162,13 +159,13 @@ namespace Digital_Assest_Management
             Assert.IsTrue(user.Drives[0].Folders.Any(f => f.FolderId == 1));
 
             subFolder.AddFolder(new Folder { FolderId = 2, FolderName = "SubFolder" });
-            Assert.IsTrue(subFolder.Folders.Any(f => f.FolderId == 2));
+            Assert.IsTrue(subFolder.SubFolders.Any(f => f.FolderId == 2));
 
-            subFolder.Folders.RemoveAll(f => f.FolderId == 2);
-            Assert.IsFalse(subFolder.Folders.Any(f => f.FolderId == 2));
+            subFolder.RemoveFolder(2);
+            Assert.IsFalse(subFolder.SubFolders.Any(f => f.FolderId == 2));
         }
         [TestMethod]
-        public void Test_Folder_Can_Add_And_Remove_File()
+        public void Folder_Can_Add_And_Remove_File()
         {
             var user = InitUserData();
             var subFolder = new Folder { FolderId = 1, FolderName = "TestFolder" };
@@ -179,11 +176,11 @@ namespace Digital_Assest_Management
             subFolder.AddFile(new File { FileId = 1, FileName = "TestFile" });
             Assert.IsTrue(subFolder.Files.Any(f => f.FileId == 1));
 
-            subFolder.Files.RemoveAll(f => f.FileId == 1);
+            subFolder.RemoveFile(1);
             Assert.IsFalse(subFolder.Files.Any(f => f.FileId == 1));
         }
         [TestMethod]
-        public void Test_Folder_CanRename()
+        public void Folder_CanRename()
         {
             var user = InitUserData();
             var folder = new Folder { FolderId = 1, FolderName = "OldName" };
@@ -192,7 +189,7 @@ namespace Digital_Assest_Management
             Assert.IsTrue(user.Drives[0].Folders.Any(f => f.FolderName == "NewName"));
         }
         [TestMethod]
-        public void Test_Folder_HasMultiple_SubFolder()
+        public void Folder_HasMultiple_SubFolder()
         {
             var user = InitUserData();
 
@@ -208,13 +205,13 @@ namespace Digital_Assest_Management
             folder.AddFolder(new Folder { FolderId = 1, FolderName = "design" });
             folder.AddFolder(new Folder { FolderId = 1, FolderName = "training" });
 
-            Assert.AreEqual(4, folder.Folders.Count);
+            Assert.AreEqual(4, folder.SubFolders.Count);
 
             folderWorking.AddFile(new File { FileId = 1, FileName = "sample.sql" });
             Assert.AreEqual(1, folderWorking.Files.Count);
         }
         [TestMethod]
-        public void Test_Folder_HasMultiple_File()
+        public void Folder_HasMultiple_File()
         {
             var user = InitUserData();
 
@@ -232,7 +229,7 @@ namespace Digital_Assest_Management
 
 
         [TestMethod]
-        public void Test_File_CanModify()
+        public void File_CanModify()
         {
             var user = InitUserData();
 
@@ -246,7 +243,7 @@ namespace Digital_Assest_Management
             Assert.IsTrue(folder.Files.Any(f => f.FileName == "NewFileName.txt"));
         }
         [TestMethod]
-        public void Test_File_CanRemove()
+        public void File_CanRemove()
         {
             var user = InitUserData();
 
@@ -259,46 +256,150 @@ namespace Digital_Assest_Management
             folder.Files.Remove(file);
             Assert.IsFalse(folder.Files.Any(f => f.FileId == 1));
         }
+    }
+
+    [TestClass]
+    public class CheckPermission
+    {
+        private static (User, User) InitUserWithPermissions()
+        {
+            // User 1 setup
+            var user1 = new User { Name = "Nam", Id = 1 };
+            var drive1 = new Drive { DriveId = 1, DriveName = "GoogleDrive" };
+            var folder1 = new Folder { FolderId = 1, FolderName = "Documents" };
+            var subfolder1_1 = new Folder { FolderId = 2, FolderName = "Reports" }; // Subfolder in Drive1
+            var file1 = new File { FileId = 1, FileName = "Report.pdf" };
+
+            user1.AddDrive(drive1);
+            drive1.AddFolder(folder1);
+            folder1.AddFolder(subfolder1_1); // Adding subfolder to folder1
+            folder1.AddFile(file1);
+
+            user1.GrantPermission(targetId: 1, permissionType: "Admin", targetType: "Drive");
+            user1.GrantPermission(targetId: 1, permissionType: "Contributor", targetType: "Folder");
+            user1.GrantPermission(targetId: 2, permissionType: "Reader", targetType: "Folder"); // Grant Reader permission to subfolder
+
+            // User 2 setup
+            var user2 = new User { Name = "Linh", Id = 2 };
+            var drive2 = new Drive { DriveId = 2, DriveName = "OneDrive" };
+            var folder2 = new Folder { FolderId = 3, FolderName = "Photos" };
+            var subfolder2_1 = new Folder { FolderId = 4, FolderName = "Vacation" }; // Subfolder in Drive2
+            var file2 = new File { FileId = 2, FileName = "Vacation.jpg" };
+
+            user2.AddDrive(drive2);
+            drive2.AddFolder(folder2);
+            folder2.AddFolder(subfolder2_1); // Adding subfolder to folder2
+            folder2.AddFile(file2);
+
+            user2.GrantPermission(targetId: 3, permissionType: "Reader", targetType: "Folder"); // Grant Reader permission to folder2
+            user2.GrantPermission(targetId: 4, permissionType: "Reader", targetType: "Folder"); // Grant Reader permission to subfolder
+
+            return (user1, user2);
+        }
+
+        [TestMethod]
+        public void Grant_And_RemovePermission_To_Folder()
+        {
+            var (user1, _) = InitUserWithPermissions();
+
+            var newFolder = new Folder { FolderId = 5, FolderName = "ImportantDocs" };
+            user1.Drives[0].AddFolder(newFolder);
+
+            // Grant Contributor permissions to the new Folder
+            user1.GrantPermission(targetId: 5, permissionType: "Contributor", targetType: "Folder");
+            Assert.IsTrue(user1.HasPermission(targetId: 5, permissionType: "Contributor", targetType: "Folder"));
+
+            // Remove Contributor permissions from the new Folder
+            user1.RemovePermission(targetId: 5, permissionType: "Contributor", targetType: "Folder");
+            Assert.IsFalse(user1.HasPermission(targetId: 5, permissionType: "Contributor", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void Grant_And_RemovePermission_To_File()
+        {
+            var (user1, _) = InitUserWithPermissions();
+
+            var newFile = new File { FileId = 3, FileName = "Document.txt" };
+            user1.Drives[0].Folders[0].AddFile(newFile);
+
+            // Grant Reader permissions to the new Folder
+            user1.GrantPermission(targetId: 3, permissionType: "Reader", targetType: "File");
+            Assert.IsTrue(user1.HasPermission(targetId: 3, permissionType: "Reader", targetType: "File"));
+
+            // Remove Reader permissions from the new Folder
+            user1.RemovePermission(targetId: 3, permissionType: "Reader", targetType: "File");
+            Assert.IsFalse(user1.HasPermission(targetId: 3, permissionType: "Reader", targetType: "File"));
+        }
 
 
         [TestMethod]
-        public void Test_Admin_InvitesUserToDrive_WithPermissions()
+        public void User1_HasAdminPermission_ForDrive()
         {
-            var user = InitUserData();
-            var guestUser = new User();
-            guestUser.Name = "ChiTai";
-            guestUser.Id = 3;
-
-            var drive = new Drive { DriveId = 1, DriveName = "DropBox" };
-            user.Drives.Add(drive);
-
-            var driverPermission = new DriverPermission();
-            driverPermission.Invite(guestUser.Id, driverId: 3, permission: "ADMIN");
-
-            Assert.IsTrue(driverPermission.HasAdminPermission(3, driverId: 3));
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsTrue(user1.HasPermission(targetId: 1, permissionType: "Admin", targetType: "Drive"));
         }
-    }
-
-    public class DriverPermission
-    {
-        public List<DriverPermissionUser> DriverPermissionSet { get; private set; } = new List<DriverPermissionUser>();
-
-        internal void Invite(int userId, int driverId, string permission)
+        [TestMethod]
+        public void User1_HasNoReaderPermission_ForDrive()
         {
-            DriverPermissionSet.Add(new DriverPermissionUser() { UserId = userId, DriverId = driverId, Permission = permission});
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsFalse(user1.HasPermission(targetId: 1, permissionType: "Reader", targetType: "Drive"));
         }
-
-        internal bool HasAdminPermission(int userId, int driverId)
+        [TestMethod]
+        public void User1_HasContributorPermission_ForFolder()
         {
-            return DriverPermissionSet.Any(e => e.UserId == userId && e.DriverId == driverId);
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsTrue(user1.HasPermission(targetId: 1, permissionType: "Contributor", targetType: "Folder"));
         }
-    }
+        [TestMethod]
+        public void User1_HasReaderPermission_ForSubfolder()
+        {
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsTrue(user1.HasPermission(targetId: 2, permissionType: "Reader", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User1_HasNoAdminPermission_ForSubfolder()
+        {
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsFalse(user1.HasPermission(targetId: 2, permissionType: "Admin", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User1_HasNoReaderPermission_ForFile()
+        {
+            var (user1, _) = InitUserWithPermissions();
+            Assert.IsFalse(user1.HasPermission(targetId: 1, permissionType: "Reader", targetType: "File"));
+        }
 
-    public class DriverPermissionUser
-    {
-        public int UserId { get; set; }
-        public int DriverId { get; set; }
-        public string Permission { get; set; }
+
+        [TestMethod]
+        public void User2_HasReaderPermission_ForFolder()
+        {
+            var (_, user2) = InitUserWithPermissions();
+            Assert.IsTrue(user2.HasPermission(targetId: 3, permissionType: "Reader", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User2_HasReaderPermission_ForSubfolder()
+        {
+            var (_, user2) = InitUserWithPermissions();
+            Assert.IsTrue(user2.HasPermission(targetId: 4, permissionType: "Reader", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User2_HasNoAdminPermission_ForFolder()
+        {
+            var (_, user2) = InitUserWithPermissions();
+            Assert.IsFalse(user2.HasPermission(targetId: 3, permissionType: "Admin", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User2_HasNoContributorPermission_ForFolder()
+        {
+            var (_, user2) = InitUserWithPermissions();
+            Assert.IsFalse(user2.HasPermission(targetId: 3, permissionType: "Contributor", targetType: "Folder"));
+        }
+        [TestMethod]
+        public void User2_HasNoPermission_ForFile()
+        {
+            var (_, user2) = InitUserWithPermissions();
+            Assert.IsFalse(user2.HasPermission(targetId: 2, permissionType: "Reader", targetType: "File"));
+        }
+
     }
 
     public class File
@@ -312,21 +413,29 @@ namespace Digital_Assest_Management
 
     }
 
-    public class Folder
-    {
+    public class Folder {
         public int FolderId { get; set; }
         public string FolderName { get; set; }
-        public List<Folder> Folders { get; private set; } = new List<Folder>();
-        public List<File> Files { get; private set; } = new List<File>();
+        public List<Folder> SubFolders { get; set; } = new List<Folder>();
+        public List<File> Files { get; set; } = new List<File>();
+        public int? ParentFolderId { get; set; } // Nullable to indicate if it's a root folder
 
-        public void AddFolder(Folder folder)
-        {
-            Folders.Add(folder);
+        
+        public void AddFolder(Folder folder) { // Add a subfolder to this folder and set its ParentFolderId
+            SubFolders.Add(folder);
+            folder.ParentFolderId = this.FolderId; // Set parent folder ID for subfolder
         }
 
-        public void AddFile(File file)
-        {
-            Files.Add(file);
+        public void RemoveFolder(int folderId) { // Remove a subfolder by its ID
+            SubFolders.RemoveAll(f => f.FolderId == folderId);
+        }
+
+        public void AddFile(File file) { // Add a file to this folder
+            Files.Add(file); 
+        }
+
+        public void RemoveFile(int fileId) { // Remove a file by its ID
+            Files.RemoveAll(f => f.FileId == fileId);
         }
     }
 
@@ -352,13 +461,11 @@ namespace Digital_Assest_Management
         public void RemoveFile(int fileId)
         {
             Files.RemoveAll(e => e.FileId == fileId);
-
         }
     }
 
     public class User
     {
-
         public string Name { get; internal set; }
         public int Id { get; internal set; }
         public List<Drive> Drives { get; set; } = new List<Drive>();
@@ -372,32 +479,42 @@ namespace Digital_Assest_Management
         {
             Drives.RemoveAll(e => e.DriveId == driveId);
         }
-        public bool HasOwnerPermission(int driveId)
-        {
-            return Drives.Any(e => e.DriveId == driveId);
-        }
+
+        // Add permissions to objects (Drive, Folder, File)
         public void GrantPermission(int targetId, string permissionType, string targetType)
         {
-            if (Permissions.Any(p => p.TargetId == targetId && p.PermissionType == permissionType && p.TargetType == targetType))
+            // Check if the permission already exists
+            if (Permissions.Any(p => 
+                p.TargetId == targetId && 
+                p.PermissionType == permissionType && 
+                p.TargetType == targetType))
             {
                 throw new InvalidOperationException("Permission already granted.");
             }
-
-            Permissions.Add(new Permission
-            {
+            // Add new permission if not duplicate
+            Permissions.Add(new Permission {
                 TargetId = targetId,
                 PermissionType = permissionType,
                 TargetType = targetType
             });
         }
+
+        // Remove permissions to objects (Drive, Folder, File)
         public void RemovePermission(int targetId, string permissionType, string targetType)
         {
-            Permissions.RemoveAll(p => p.TargetId == targetId && p.PermissionType == permissionType && p.TargetType == targetType);
+            Permissions.RemoveAll( p => 
+                p.TargetId == targetId && 
+                p.PermissionType == permissionType && 
+                p.TargetType == targetType);
         }
 
+        // Check object permissions (Drive, Folder, File)
         public bool HasPermission(int targetId, string permissionType, string targetType)
         {
-            return Permissions.Any(p => p.TargetId == targetId && p.PermissionType == permissionType && p.TargetType == targetType);
+            return Permissions.Any(p => 
+                p.TargetId == targetId && 
+                p.PermissionType == permissionType && 
+                p.TargetType == targetType);
         }
     }
 
@@ -407,5 +524,4 @@ namespace Digital_Assest_Management
         public string TargetType { get; set; } //  Drive, Folder, File
         public string PermissionType { get; set; } // Permission: "Admin", "Contributor", "Reader"
     }
-
 }
