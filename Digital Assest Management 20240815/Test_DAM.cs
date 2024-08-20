@@ -1,7 +1,9 @@
+using System.Security;
+
 namespace Digital_Assest_Management
 {
     [TestClass]
-    public class Test_DAM
+    public class Test_Basic_Object_Classes
     {
         private static User InitUserData()
         {
@@ -399,8 +401,8 @@ namespace Digital_Assest_Management
             var (_, user2) = InitUserWithPermissions();
             Assert.IsFalse(user2.HasPermission(targetId: 2, permissionType: "Reader", targetType: "File"));
         }
-
     }
+
 
     public class File
     {
@@ -480,10 +482,9 @@ namespace Digital_Assest_Management
             Drives.RemoveAll(e => e.DriveId == driveId);
         }
 
-        // Add permissions to objects (Drive, Folder, File)
         public void GrantPermission(int targetId, string permissionType, string targetType)
         {
-            // Check if the permission already exists
+            /*// Check if the permission already exists
             if (Permissions.Any(p => 
                 p.TargetId == targetId && 
                 p.PermissionType == permissionType && 
@@ -496,10 +497,18 @@ namespace Digital_Assest_Management
                 TargetId = targetId,
                 PermissionType = permissionType,
                 TargetType = targetType
-            });
+            });*/
+            //Only add permission if permission does not exist
+            if (!HasPermission(targetId, permissionType, targetType))
+            {
+                Permissions.Add(new Permission
+                {
+                    TargetId = targetId,
+                    PermissionType = permissionType,
+                    TargetType = targetType
+                });
+            }
         }
-
-        // Remove permissions to objects (Drive, Folder, File)
         public void RemovePermission(int targetId, string permissionType, string targetType)
         {
             Permissions.RemoveAll( p => 
@@ -507,8 +516,6 @@ namespace Digital_Assest_Management
                 p.PermissionType == permissionType && 
                 p.TargetType == targetType);
         }
-
-        // Check object permissions (Drive, Folder, File)
         public bool HasPermission(int targetId, string permissionType, string targetType)
         {
             return Permissions.Any(p => 
