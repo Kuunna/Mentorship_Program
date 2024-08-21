@@ -7,13 +7,22 @@ namespace Digital_Assest_Management
     {
         private static User InitUserData()
         {
-            var user = new User();
-            user.Name = "John";
-            user.Id = 1;
-
+            var user = new User
+            {
+                Name = "John",
+                Id = 1
+            };
             user.AddDrive(new Drive { DriveId = 1, DriveName = "GoogleDrive" });
             user.AddDrive(new Drive { DriveId = 2, DriveName = "OneDrive" });
+
+
+/*            var newUser = new UserBuilder()
+                .AddUser("John")
+                .AddDrive(new Drive { DriveId = 1, DriveName = "GoogleDrive" })
+                .AddDrive(new Drive { DriveId = 2, DriveName = "OneDrive" })
+                .Build();*/
             return user;
+
         }
         [TestMethod]
         public void User_Can_Add_And_Remove_Drive()
@@ -396,13 +405,12 @@ namespace Digital_Assest_Management
             Assert.IsFalse(user2.HasPermission(targetId: 3, permissionType: "Contributor", targetType: "Folder"));
         }
         [TestMethod]
-        public void User2_HasNoPermission_ForFile()
+        public void User2_HasNoReaderPermission_ForFile()
         {
             var (_, user2) = InitUserWithPermissions();
             Assert.IsFalse(user2.HasPermission(targetId: 2, permissionType: "Reader", targetType: "File"));
         }
     }
-
 
     public class File
     {
@@ -465,6 +473,12 @@ namespace Digital_Assest_Management
             Files.RemoveAll(e => e.FileId == fileId);
         }
     }
+    public class Permission
+    {
+        public int TargetId { get; set; } // ID of Drive, Folder, File
+        public string TargetType { get; set; } //  Drive, Folder, File
+        public string PermissionType { get; set; } // Permission: "Admin", "Contributor", "Reader"
+    }
 
     public class User
     {
@@ -484,21 +498,11 @@ namespace Digital_Assest_Management
 
         public void GrantPermission(int targetId, string permissionType, string targetType)
         {
-            /*// Check if the permission already exists
-            if (Permissions.Any(p => 
-                p.TargetId == targetId && 
-                p.PermissionType == permissionType && 
-                p.TargetType == targetType))
+            if (HasPermission(targetId, "admin", targetType))
             {
-                throw new InvalidOperationException("Permission already granted.");
+                throw new InvalidOperationException("Only admins can grant admin permissions.");
             }
-            // Add new permission if not duplicate
-            Permissions.Add(new Permission {
-                TargetId = targetId,
-                PermissionType = permissionType,
-                TargetType = targetType
-            });*/
-            //Only add permission if permission does not exist
+
             if (!HasPermission(targetId, permissionType, targetType))
             {
                 Permissions.Add(new Permission
@@ -509,26 +513,72 @@ namespace Digital_Assest_Management
                 });
             }
         }
+
         public void RemovePermission(int targetId, string permissionType, string targetType)
         {
-            Permissions.RemoveAll( p => 
-                p.TargetId == targetId && 
-                p.PermissionType == permissionType && 
+            Permissions.RemoveAll(p =>
+                p.TargetId == targetId &&
+                p.PermissionType == permissionType &&
                 p.TargetType == targetType);
         }
         public bool HasPermission(int targetId, string permissionType, string targetType)
         {
-            return Permissions.Any(p => 
-                p.TargetId == targetId && 
-                p.PermissionType == permissionType && 
+            return Permissions.Any(p =>
+                p.TargetId == targetId &&
+                p.PermissionType == permissionType &&
                 p.TargetType == targetType);
         }
     }
 
-    public class Permission
+    [TestClass]
+    public class ScenariosTests
     {
-        public int TargetId { get; set; } // ID of Drive, Folder, File
-        public string TargetType { get; set; } //  Drive, Folder, File
-        public string PermissionType { get; set; } // Permission: "Admin", "Contributor", "Reader"
+        public static (User admin, User contributor, User reader) InitUsersWithPermissions()
+        {
+            var admin = new User { Name = "AdminUser", Id = 1 };
+            var contributor = new User { Name = "Contributor1", Id = 2 };
+            var reader = new User { Name = "Reader1", Id = 3 };
+
+            var drive = new Drive { DriveId = 1, DriveName = "Root1" };
+            var subFolder = new Folder { FolderId = 1, FolderName = "SubFolder1" };
+            var file = new File { FileId = 1, FileName = "File3.docx" };
+
+            drive.AddFolder(subFolder);
+            subFolder.AddFile(file);
+
+            admin.AddDrive(drive);
+            admin.GrantPermission(targetId: 1, permissionType: "Admin", targetType: "Drive");
+
+            contributor.GrantPermission(targetId: 1, permissionType: "Contributor", targetType: "Folder");
+            reader.GrantPermission(targetId: 1, permissionType: "Reader", targetType: "Folder");
+
+            return (admin, contributor, reader);
+        }
+
+        [TestMethod]
+        public void Admin_Sharing_Contributor_Permission()
+        {
+            var (admin, contributor, _) = InitUsersWithPermissions();
+
+            // Admin shares Contributor permission for SubFolder1 with contributor
+            admin.GrantPermission(targetId: 1, permissionType: "Contributor", targetType: "Folder");
+
+            // Check if contributor now has Contributor permissions on SubFolder1
+            Assert.IsTrue(contributor.HasPermission(targetId: 1, permissionType: "Contributor", targetType: "Folder"));
+        }
+
+        [TestMethod]
+        public void Contributor_Adding_And_Modifying_Files()
+        {
+
+        }
+
+        [TestMethod]
+        public void Reader_Trying_To_Modify_Files()
+        {
+            
+        }
+
     }
+
 }
