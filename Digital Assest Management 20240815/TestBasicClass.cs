@@ -1,5 +1,3 @@
-using System.Security;
-
 namespace Digital_Assest_Management
 {
     [TestClass]
@@ -7,19 +5,11 @@ namespace Digital_Assest_Management
     {
         private static User InitUserData()
         {
-            var user = new User { Name = "John", Id = 1 };
+            var nam = new User { Name = "John", Id = 1 };
+            nam.AddDrive(new Drive { DriveId = 1, OwnerId = nam.Id, DriveName = "GoogleDrive" });
+            nam.AddDrive(new Drive { DriveId = 2, OwnerId = nam.Id, DriveName = "OneDrive" });
 
-            var Nam = new  { Name = "Nam", Id = 2 };
-            user.AddDrive(new Drive { DriveId = 1, DriveName = "GoogleDrive" });
-            user.AddDrive(new Drive { DriveId = 2, DriveName = "OneDrive" });
-
-
-/*            var newUser = new UserBuilder()
-                .AddUser("John")
-                .AddDrive(new Drive { DriveId = 1, DriveName = "GoogleDrive" })
-                .AddDrive(new Drive { DriveId = 2, DriveName = "OneDrive" })
-                .Build();*/
-            return user;
+            return nam;
 
         }
         [TestMethod]
@@ -272,11 +262,17 @@ namespace Digital_Assest_Management
     {
         private static User InitUserData()
         {
-            var user1 = new User { Id = 1, Name = "John" };
-            user1.AddDrive(new Drive { DriveId = 1, DriveName = "GoogleDrive" });
-            user1.AddDrive(new Drive { DriveId = 2, DriveName = "OneDrive" });
+            var nam = new User { Id = 1, Name = "Nam" };
+            var nguyen = new User { Id = 2, Name = "Nguyen" };
+            var tai = new User { Id = 3, Name = "Tai" };
 
-            return user1;
+            var googleDrive = new Drive { DriveId = 1, OwnerId = nam.Id, DriveName = "GoogleDrive" };
+            var oneDrive = new Drive { DriveId = 2, OwnerId = nam.Id, DriveName = "OneDrive" };
+
+            nam.AddDrive(googleDrive);
+            nam.AddDrive(oneDrive);
+
+            return nam;
         }
 
         [TestMethod]
@@ -479,11 +475,10 @@ namespace Digital_Assest_Management
             var drive = user.Drives[0];
             var folder = new Folder { StoreId = 1, StoreName = "Folder" };
             drive.AddFolder(folder);
-
-            var file = new File { StoreId = 1, StoreName = "File1.txt" };
+            var file = new File { StoreId = 1, StoreName = "NewFile.pdf" };
             folder.AddFile(file);
 
-            Assert.IsTrue(folder.Files.Any(f => f.StoreId == 1 && f.StoreName == "File1.txt"));
+            Assert.IsTrue(folder.Files.Any(f => f.StoreId == 1 && f.StoreName == "NewFile.pdf"));
         }
 
         [TestMethod]
@@ -495,9 +490,9 @@ namespace Digital_Assest_Management
             var folder2 = new Folder { StoreId = 2, StoreName = "Folder2" };
             drive.AddFolder(folder1);
             drive.AddFolder(folder2);
-
-            var file = new File { StoreId = 1, StoreName = "FileToMove.txt" };
+            var file = new File { StoreId = 1, StoreName = "File" };
             folder1.AddFile(file);
+
             folder1.RemoveFile(1);
             folder2.AddFile(file);
 
@@ -506,34 +501,32 @@ namespace Digital_Assest_Management
         }
 
         [TestMethod]
-        public void Test_File_CanBeDeleted()
+        public void Test_File_SharingPermissions()
         {
             var user = InitUserData();
             var drive = user.Drives[0];
             var folder = new Folder { StoreId = 1, StoreName = "Folder" };
+            var file = new File { StoreId = 1, StoreName = "File" };
             drive.AddFolder(folder);
-            var file = new File { StoreId = 1, StoreName = "FileToDelete.txt" };
             folder.AddFile(file);
+            user.GrantPermission(storeId: folder.StoreId, permissionType: "Reader");
 
-            folder.RemoveFile(1);
-            Assert.IsFalse(folder.Files.Any(f => f.StoreId == 1));
+            Assert.IsTrue(user.HasPermission(storeId: file.StoreId, permissionType: "Reader"));
         }
 
         [TestMethod]
-        public void Test_File_CascadePermissions()
+        public void Test_File_AccessRestriction()
         {
             var user = InitUserData();
             var drive = user.Drives[0];
             var folder = new Folder { StoreId = 1, StoreName = "Folder" };
-            drive.AddFolder(folder);
             var file = new File { StoreId = 1, StoreName = "File" };
+            drive.AddFolder(folder);
             folder.AddFile(file);
+            user.GrantPermission(storeId: folder.StoreId, permissionType: "Reader");
 
-            user.GrantPermission(storeId: file.StoreId, permissionType: "Editor");
-            Assert.IsTrue(user.HasPermission(storeId: file.StoreId, permissionType: "Editor"));
-            Assert.IsTrue(user.HasPermission(storeId: folder.StoreId, permissionType: "Editor"));
-            Assert.IsTrue(user.HasPermission(storeId: drive.DriveId, permissionType: "Editor"));
+            Assert.IsTrue(user.HasPermission(storeId: file.StoreId, permissionType: "Reader"));
+            Assert.IsFalse(user.HasPermission(storeId: file.StoreId, permissionType: "Admin"));
         }
     }
 }
-    
