@@ -1,4 +1,4 @@
-/*namespace Digital_Assest_Management
+namespace Digital_Assest_Management
 {
     public class File
     {
