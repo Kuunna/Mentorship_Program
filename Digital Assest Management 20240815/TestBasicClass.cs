@@ -267,7 +267,7 @@ namespace Digital_Assest_Management
         }
     }
 
-    /*[TestClass]
+    [TestClass]
     public class Test_Basic_Object
     {
         private static User InitUserData()
@@ -534,6 +534,6 @@ namespace Digital_Assest_Management
             Assert.IsTrue(user.HasPermission(storeId: folder.StoreId, permissionType: "Editor"));
             Assert.IsTrue(user.HasPermission(storeId: drive.DriveId, permissionType: "Editor"));
         }
-    }*/
+    }
 }
     
