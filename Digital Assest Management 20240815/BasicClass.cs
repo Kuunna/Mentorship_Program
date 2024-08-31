@@ -40,6 +40,7 @@ namespace Digital_Assest_Management
         public int DriveId { get; set; }  // ID của Drive chứa folder
         public List<Folder> SubFolders { get; set; } = new List<Folder>();  // Danh sách thư mục con
         public List<File> Files { get; set; } = new List<File>();  // Danh sách file
+        public int ParentFolderId { get; internal set; }
 
         // Thêm thư mục con vào thư mục hiện tại và thiết lập ParentStoreId
         public void AddSubFolder(Folder folder)
@@ -192,40 +193,40 @@ namespace Digital_Assest_Management
                          .ToList();
         }
 
-        // Cấp quyền truy cập cho một StoreItem cụ thể, chỉ dành cho Owner và Admin
-        public void GrantPermission(int storeId, string permissionType)
+        // Cấp quyền truy cập cho một StoreItem cụ thể cho người dùng khác
+        public void GrantPermission(User targetUser, int storeId, string permissionType)
         {
             if (!IsOwner(storeId) && !HasPermission(storeId, "Admin"))
             {
                 throw new InvalidOperationException("Only owners and admins can grant permissions.");
             }
 
-            if (!HasPermission(storeId, permissionType))
+            if (!targetUser.HasPermission(storeId, permissionType))
             {
-                Permissions.Add(new Permission
+                targetUser.Permissions.Add(new Permission
                 {
                     StoreId = storeId,
                     PermissionType = permissionType,
-                    UserId = this.Id
+                    UserId = targetUser.Id
                 });
             }
 
-            CascadePermission(storeId, permissionType);
+            CascadePermission(targetUser, storeId, permissionType);
         }
 
-        // Cấp quyền truy cập cho các StoreItem con của StoreItem cụ thể
-        private void CascadePermission(int storeId, string permissionType)
+        // Cấp quyền truy cập cho các StoreItem con của StoreItem cụ thể cho người dùng khác
+        private void CascadePermission(User targetUser, int storeId, string permissionType)
         {
             var subStores = GetSubStores(storeId);
             foreach (var subStore in subStores)
             {
-                if (!HasPermission(subStore.StoreId, permissionType))
+                if (!targetUser.HasPermission(subStore.StoreId, permissionType))
                 {
-                    Permissions.Add(new Permission
+                    targetUser.Permissions.Add(new Permission
                     {
                         StoreId = subStore.StoreId,
                         PermissionType = permissionType,
-                        UserId = this.Id
+                        UserId = targetUser.Id
                     });
                 }
             }
@@ -262,33 +263,32 @@ namespace Digital_Assest_Management
             return Drives.Any(d => d.OwnerId == this.Id && d.DriveId == storeId);
         }
 
-        // Xóa quyền truy cập từ một StoreItem cụ thể và quyền này cũng sẽ bị xóa từ các StoreItem con
-        public void DeletePermission(int storeId, string permissionType)
+        // Xóa quyền truy cập từ một StoreItem cụ thể của người dùng khác
+        public void DeletePermission(User targetUser, int storeId, string permissionType)
         {
             if (!IsOwner(storeId) && !HasPermission(storeId, "Admin"))
             {
                 throw new InvalidOperationException("Only owners and admins can delete permissions.");
             }
 
-            RemovePermission(storeId, permissionType);
-            RemoveCascadingPermissions(storeId, permissionType);
+            RemovePermission(targetUser, storeId, permissionType);
+            RemoveCascadingPermissions(targetUser, storeId, permissionType);
         }
 
-        // Xóa quyền truy cập từ một StoreItem
-        private void RemovePermission(int storeId, string permissionType)
+        // Xóa quyền truy cập từ một StoreItem của người dùng khác
+        private void RemovePermission(User targetUser, int storeId, string permissionType)
         {
-            Permissions.RemoveAll(p => p.StoreId == storeId && p.PermissionType == permissionType);
+            targetUser.Permissions.RemoveAll(p => p.StoreId == storeId && p.PermissionType == permissionType);
         }
 
-        // Xóa quyền truy cập từ các StoreItem con của StoreItem cụ thể
-        private void RemoveCascadingPermissions(int storeId, string permissionType)
+        // Xóa quyền truy cập từ các StoreItem con của StoreItem cụ thể của người dùng khác
+        private void RemoveCascadingPermissions(User targetUser, int storeId, string permissionType)
         {
             var subStores = GetSubStores(storeId);
             foreach (var subStore in subStores)
             {
-                RemovePermission(subStore.StoreId, permissionType);
+                RemovePermission(targetUser, subStore.StoreId, permissionType);
             }
         }
     }
-
 }
