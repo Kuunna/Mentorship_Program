@@ -20,4 +20,9 @@ namespace LikeLinq
         IQueryable<T> CreateQuery<T>(Expression expression);
         object Execute(Expression expression);
     }
+    internal class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
 }
