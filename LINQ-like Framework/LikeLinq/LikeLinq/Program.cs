@@ -6,26 +6,18 @@ using System.Linq.Expressions;
 
 namespace LikeLinq
 {
-    public interface IMyQueryable<T>
+    public interface IQueryable<T> : IEnumerable<T>
     {
         Expression Expression { get; }
-        IMyQueryProvider Provider { get; }
+        IQueryProvider Provider { get; }
+
+        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
+        IQueryable<T> Select<TResult>(Expression<Func<T, TResult>> selector);
+        // ... các phương thức khác
     }
-    public interface IMyQueryProvider
+    public interface IQueryProvider
     {
         IQueryable<T> CreateQuery<T>(Expression expression);
         object Execute(Expression expression);
     }
-    public class MyQueryable<T> : IMyQueryable<T>
-    {
-        public Expression Expression { get; private set; }
-        public IMyQueryProvider Provider { get; private set; }
-
-        public MyQueryable(IMyQueryProvider provider, Expression expression)
-        {
-            Provider = provider;
-            Expression = expression;
-        }
-    }
-
 }
