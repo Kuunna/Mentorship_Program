@@ -1,0 +1,15 @@
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.TestPlatform.AdapterUtilities.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\LikeLinq.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\LikeLinq.pdb
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\obj\Debug\LikeLinq.csproj.AssemblyReference.cache
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\obj\Debug\LikeLinq.csproj.CoreCompileInputs.cache
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\obj\Debug\LikeLinq.csproj.Up2Date
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\obj\Debug\LikeLinq.dll
+D:\Mentorship_Program\LINQ-like Framework\LikeLinq\LikeLinq\obj\Debug\LikeLinq.pdb
