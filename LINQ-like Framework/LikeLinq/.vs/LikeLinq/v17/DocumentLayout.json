@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 656,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -28,17 +28,11 @@
               "RelativeDocumentMoniker": "LikeLinq\\Program.cs",
               "ToolTip": "D:\\Mentorship_Program\\LINQ-like Framework\\LikeLinq\\LikeLinq\\Program.cs",
               "RelativeToolTip": "LikeLinq\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAALMAAAAAAAAAAAAAALkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-13T18:09:49.791Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 656,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -47,7 +41,7 @@
               "RelativeDocumentMoniker": "LikeLinq\\UnitTest1.cs",
               "ToolTip": "D:\\Mentorship_Program\\LINQ-like Framework\\LikeLinq\\LikeLinq\\UnitTest1.cs",
               "RelativeToolTip": "LikeLinq\\UnitTest1.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAYwCMAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwBMAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-13T18:09:06.261Z",
               "EditorCaption": ""
