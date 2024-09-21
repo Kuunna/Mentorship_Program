@@ -121,7 +121,17 @@ namespace LikeLinq
                 result.Select(s => s.Age).ToArray()
                 );
         }
-         
+
+        [TestMethod]
+        public void Count_ShouldReturnNumberOfElementsInSequence()
+        {
+            var numbers = new List<int> { 1, 2, 3 };
+
+            var result = LinqService<int>.From(numbers).Count();
+
+            Assert.AreEqual(3, result);
+        }
+
         [TestMethod]
         public void First_ShouldReturnFirstElement()
         {
@@ -159,16 +169,6 @@ namespace LikeLinq
             var result = LinqService<int>.From(numbers).FirstOrDefault(0);
 
             Assert.AreEqual(0, result);
-        }
-
-        [TestMethod]
-        public void Count_ShouldReturnNumberOfElementsInSequence()
-        {
-            var numbers = new List<int> { 1, 2, 3 };
-
-            var result = LinqService<int>.From(numbers).Count();
-
-            Assert.AreEqual(3, result);
         }
 
         [TestMethod]

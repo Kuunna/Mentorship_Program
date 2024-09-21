@@ -67,6 +67,9 @@ namespace LikeLinq
             });
             return this;
         }
+        public int Count() { 
+            return data.Count; 
+        }
 
         public T First()
         {
@@ -74,7 +77,7 @@ namespace LikeLinq
             {
                 throw new InvalidOperationException("No elements");
             }
-            return data[0];
+            return data[0]; 
         }
 
         public T FirstOrDefault(T defaultValue)
@@ -82,10 +85,6 @@ namespace LikeLinq
             return data.Count > 0 ? data[0] : defaultValue;
         }
 
-        public int Count()
-        {
-            return data.Count;
-        }
 
         public bool Any(Func<T, bool> predicate)
         {
