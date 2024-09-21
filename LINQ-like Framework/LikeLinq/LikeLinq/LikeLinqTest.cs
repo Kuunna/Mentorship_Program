@@ -1,6 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LikeLinq
 {
@@ -12,7 +13,6 @@ namespace LikeLinq
         {
             var numbers = new List<int> { 1, 2, 3, 4, 5 };
             var predicate = new Func<int, bool>(n => n > 2);
-
             var result = LinqService<int>.From(numbers).Where(predicate).ToArray();
 
             CollectionAssert.AreEqual(new[] { 3, 4, 5 }, result);
@@ -28,7 +28,6 @@ namespace LikeLinq
                 new Student(3, "Bob", 16, "A"),
             };
             var predicate = new Func<Student, bool>(student => student.Grade == "A");
-
             var result = LinqService<Student>.From(students).Where(predicate).ToArray();
 
             CollectionAssert.AreEqual(new[] { students[0], students[2] }, result);
@@ -38,11 +37,11 @@ namespace LikeLinq
         public void Select_ShouldMapNumbersBasedOnSelectorFunction()
         {
             var numbers = new List<int> { 1, 2, 3, 4, 5 };
-            var selector = new Func<int, int>(n => n * n);
+            var selector = new Func<int, int>(n => n * 2);
 
             var result = LinqService<int>.From(numbers).Select(selector).ToArray();
 
-            CollectionAssert.AreEqual(new[] { 1, 4, 9, 16, 25 }, result);
+            CollectionAssert.AreEqual(new[] { 2, 4, 6, 8, 10 }, result);
         }
 
         [TestMethod]
@@ -85,8 +84,13 @@ namespace LikeLinq
 
             var result = LinqService<Student>.From(students).OrderBy(keySelector).ToArray();
 
-            CollectionAssert.AreEqual(new[] { students[2], students[0], students[1] }, result);
+            CollectionAssert.AreEqual(
+                new[] { 15, 16, 17 },
+                result.Select(student => student.Age).ToArray()
+            );
+
         }
+
 
         [TestMethod]
         public void OrderByDescending_ShouldOrderNumbersInDescendingOrder()
@@ -112,9 +116,12 @@ namespace LikeLinq
 
             var result = LinqService<Student>.From(students).OrderByDescending(keySelector).ToArray();
 
-            CollectionAssert.AreEqual(new[] { students[1], students[0], students[2] }, result);
+            CollectionAssert.AreEqual(
+                new[] { 17, 16, 15 }, 
+                result.Select(s => s.Age).ToArray()
+                );
         }
-
+         
         [TestMethod]
         public void First_ShouldReturnFirstElement()
         {

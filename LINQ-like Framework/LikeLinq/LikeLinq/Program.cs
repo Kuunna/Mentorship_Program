@@ -13,8 +13,13 @@ namespace LikeLinq
         }
 
         public static LinqService<T> From(List<T> data)
-        {s
+        {
             return new LinqService<T>(data);
+        }
+
+        public List<T> ToArray()
+        {
+            return new List<T>(data);
         }
 
         public LinqService<T> Where(Func<T, bool> predicate)
@@ -191,10 +196,6 @@ namespace LikeLinq
             return sum;
         }
 
-        public List<T> ToArray()
-        {
-            return new List<T>(data);
-        }
     }
 
     public class Student
