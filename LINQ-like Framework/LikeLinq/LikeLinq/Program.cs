@@ -13,7 +13,7 @@ namespace LikeLinq
         }
 
         public static LinqService<T> From(List<T> data)
-        {
+        {s
             return new LinqService<T>(data);
         }
 
