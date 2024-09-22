@@ -232,7 +232,6 @@ namespace LikeLinq
             var keySelector = new Func<int, int>(n => n);
 
             var result = LinqService<int>.From(numbers).GroupBy(keySelector);
-
             var expected = new Dictionary<int, List<int>>
             {
                 { 1, new List<int> { 1, 1 } },
@@ -272,45 +271,110 @@ namespace LikeLinq
                 CollectionAssert.AreEqual(expected[key], result[key]);
             }
         }
-/*
+
         [TestMethod]
-        public void Sum_ShouldReturnSumOfElements()
+        public void Average_ShouldCalculateAverageForCustomSelector()
         {
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var students = new List<Student>
+            {
+                new Student(1, "John", 16, "A"),
+                new Student(2, "Alice", 17, "B"),
+                new Student(3, "Bob", 15, "A")
+            };
+            var selector = new Func<Student, double>(student => student.Age);
 
-            var result = LinqService<int>.From(numbers).Sum();
-
-            Assert.AreEqual(15, result);
+            var result = LinqService<Student>.From(students).Average(selector);
+            Assert.AreEqual(16.0, result);
         }
 
         [TestMethod]
-        public void Average_ShouldReturnAverageOfElements()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Average_ShouldThrowExceptionForEmptyList()
         {
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var emptyList = new List<int>();
+            var selector = new Func<int, double>(n => n);
 
-            var result = LinqService<int>.From(numbers).Average();
-
-            Assert.AreEqual(3, result);
+            LinqService<int>.From(emptyList).Average(selector);
         }
 
         [TestMethod]
-        public void Max_ShouldReturnMaximumElement()
+        public void Max_ShouldReturnStudentWithHighestAge()
         {
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var students = new List<Student>
+            {
+                new Student(1, "John", 16, "A"),
+                new Student(2, "Alice", 17, "B"),
+                new Student(3, "Bob", 15, "A")
+            };
+            var selector = new Func<Student, double>(student => student.Age);
 
-            var result = LinqService<int>.From(numbers).Max();
+            var result = LinqService<Student>.From(students).Max(selector);
 
-            Assert.AreEqual(5, result);
+            Assert.AreEqual(students[1], result);
         }
 
         [TestMethod]
-        public void Min_ShouldReturnMinimumElement()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Max_ShouldThrowException_WhenNoElements()
         {
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var students = new List<Student>();
+            var selector = new Func<Student, double>(student => student.Age);
 
-            var result = LinqService<int>.From(numbers).Min();
+            LinqService<Student>.From(students).Max(selector);
+        }
 
-            Assert.AreEqual(1, result);
-        }*/
+        [TestMethod]
+        public void Min_ShouldReturnStudentWithLowestAge()
+        {
+            var students = new List<Student>
+        {
+            new Student(1, "John", 16, "A"),
+            new Student(2, "Alice", 17, "B"),
+            new Student(3, "Bob", 15, "A")
+        };
+            var selector = new Func<Student, double>(student => student.Age);
+
+            var result = LinqService<Student>.From(students).Min(selector);
+
+            Assert.AreEqual(students[2], result); // Bob có tuổi thấp nhất (15)
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Min_ShouldThrowException_WhenNoElements()
+        {
+            var students = new List<Student>();
+            var selector = new Func<Student, double>(student => student.Age);
+
+            LinqService<Student>.From(students).Min(selector);
+        }
+
+        [TestMethod]
+        public void Sum_ShouldReturnSumOfStudentAges()
+        {
+            var students = new List<Student>
+            {
+                new Student(1, "John", 16, "A"),
+                new Student(2, "Alice", 17, "B"),
+                new Student(3, "Bob", 15, "A")
+            };
+            var selector = new Func<Student, double>(student => student.Age);
+
+            var result = LinqService<Student>.From(students).Sum(selector);
+
+            Assert.AreEqual(48, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Sum_ShouldThrowExceptionForEmptyList()
+        {
+            var students = new List<Student>();
+            var selector = new Func<Student, double>(student => student.Age);
+
+            LinqService<Student>.From(students).Sum(selector);
+        }
+
+
     }
 }

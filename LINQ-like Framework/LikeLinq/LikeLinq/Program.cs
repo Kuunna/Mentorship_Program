@@ -147,52 +147,88 @@ namespace LikeLinq
             return sum / data.Count;
         }
 
-        public double Max(Func<T, double> selector)
+        public T Max(Func<T, double> selector)
         {
             if (data.Count == 0)
             {
                 throw new InvalidOperationException("No elements");
             }
 
-            double maxValue = double.MinValue;
+            var maxValue = selector(data[0]);  
+            var maxItem = data[0];
+
             foreach (var item in data)
             {
-                var value = selector(item);
-                if (value > maxValue)
+                var currentValue = selector(item);
+                if (currentValue > maxValue)
                 {
-                    maxValue = value;
+                    maxValue = currentValue;
+                    maxItem = item;
                 }
             }
-            return maxValue;
+            return maxItem;
         }
 
-        public double Min(Func<T, double> selector)
+        public T Min(Func<T, double> selector)
         {
             if (data.Count == 0)
             {
                 throw new InvalidOperationException("No elements");
             }
 
-            double minValue = double.MaxValue;
+            var minValue = selector(data[0]); 
+            var minItem = data[0];
+
             foreach (var item in data)
             {
-                var value = selector(item);
-                if (value < minValue)
+                var currentValue = selector(item);
+                if (currentValue < minValue)
                 {
-                    minValue = value;
+                    minValue = currentValue;
+                    minItem = item;
                 }
             }
-            return minValue;
+            return minItem;
         }
+
 
         public double Sum(Func<T, double> selector)
         {
-            var sum = 0.0;
+            if (data.Count == 0)
+            {
+                throw new InvalidOperationException("No elements");
+            }
+
+            double sum = 0;
+
             foreach (var item in data)
             {
                 sum += selector(item);
             }
             return sum;
+        }
+
+        public LinqService<TResult> Join<TKey, TResult>(
+            IEnumerable<T> outer,
+            IEnumerable<T> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<T, TKey> innerKeySelector,
+            Func<T, T, TResult> resultSelector)
+        {
+            var result = new List<TResult>();
+
+            foreach (var outerItem in outer)
+            {
+                foreach (var innerItem in inner)
+                {
+                    if (outerKeySelector(outerItem).Equals(innerKeySelector(innerItem)))
+                    {
+                        result.Add(resultSelector(outerItem, innerItem));
+                    }
+                }
+            }
+
+            return new LinqService<TResult>(result);
         }
 
     }
