@@ -273,6 +273,61 @@ namespace LikeLinq
         }
 
         [TestMethod]
+        public void GroupByToKeyValueList_ShouldGroupNumbersByModule()
+        {
+            var numbers = new List<int> { 1, 2, 3, 4, 5, 6 };
+            var keySelector = new Func<int, int>(n => n % 2);
+
+            var result = LinqService<int>.From(numbers).GroupByToKeyValueList(keySelector);
+
+            var expected = new List<KeyValuePair<int, List<int>>>
+            {
+                new KeyValuePair<int, List<int>>(1, new List<int> { 1, 3, 5 }),
+                new KeyValuePair<int, List<int>>(0, new List<int> { 2, 4, 6 }),
+            };
+
+            Assert.AreEqual(expected.Count, result.Count);
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Key, result[i].Key);
+                CollectionAssert.AreEqual(expected[i].Value, result[i].Value);
+            }
+        }
+
+
+        [TestMethod]
+        public void GroupByToKeyValueList_ShouldGroupStudentsByGrade()
+        {
+            var students = new List<Student>
+            {
+                new Student(1, "John", 16, "A"),
+                new Student(2, "Alice", 17, "B"),
+                new Student(3, "Bob", 16, "A"),
+                new Student(4, "Eve", 17, "B"),
+            };
+
+            var keySelector = new Func<Student, string>(student => student.Grade);
+
+            var expected = new List<KeyValuePair<string, List<Student>>>
+            {
+                new KeyValuePair<string, List<Student>>("A", new List<Student> { students[0], students[2] }),
+                new KeyValuePair<string, List<Student>>("B", new List<Student> { students[1], students[3] }),
+            };
+
+            var result = LinqService<Student>.From(students).GroupByToKeyValueList(keySelector);
+
+            Assert.AreEqual(expected.Count, result.Count);
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Key, result[i].Key);
+                CollectionAssert.AreEqual(expected[i].Value, result[i].Value);
+            }
+        }
+
+
+        [TestMethod]
         public void Average_ShouldCalculateAverageForCustomSelector()
         {
             var students = new List<Student>
@@ -375,6 +430,47 @@ namespace LikeLinq
             LinqService<Student>.From(students).Sum(selector);
         }
 
+        [TestMethod]
+        public void Join_ShouldCombineStudentsAndScores()
+        {
+            // Arrange
+            var students = new List<Student>
+            {
+                new Student(1, "John", 16, "A"),
+                new Student(2, "Alice", 17, "B"),
+            };
 
+            var scores = new List<Score>
+            {
+                new Score(1, 90),
+                new Score(2, 85),
+            };
+
+            var outerKeySelector = new Func<Student, int>(student => student.Id);
+            var innerKeySelector = new Func<Score, int>(score => score.StudentId);
+            var resultSelector = new Func<Student, Score, object>((student, score) => new
+            {
+                StudentName = student.Name,
+                ScoreValue = score.ScoreValue
+            });
+
+            // Act
+            var result = LinqService<Student>.From(students)
+                .Join(scores, outerKeySelector, innerKeySelector, resultSelector)
+                .ToArray();
+
+            // Assert
+            var expected = new[]
+            {
+                new { StudentName = "John", ScoreValue = 90 },
+                new { StudentName = "Alice", ScoreValue = 85 },
+            };
+
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i].StudentName, ((dynamic)result[i]).StudentName);
+                Assert.AreEqual(expected[i].ScoreValue, ((dynamic)result[i]).ScoreValue);
+            }
+        }
     }
 }

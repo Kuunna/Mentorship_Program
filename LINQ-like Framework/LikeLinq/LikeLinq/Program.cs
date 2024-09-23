@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LikeLinq
 {   
@@ -119,18 +120,39 @@ namespace LikeLinq
 
         public Dictionary<TKey, List<T>> GroupBy<TKey>(Func<T, TKey> keySelector)
         {
-            var map = new Dictionary<TKey, List<T>>();
+            var groupedData = new Dictionary<TKey, List<T>>();
+
             foreach (var item in data)
             {
                 var key = keySelector(item);
-                if (!map.ContainsKey(key))
+                if (!groupedData.ContainsKey(key))
                 {
-                    map[key] = new List<T>();
+                    groupedData[key] = new List<T>(); 
                 }
-                map[key].Add(item);
+                groupedData[key].Add(item);
             }
-            return map;
+
+            return groupedData;
         }
+
+
+        public List<KeyValuePair<TKey, List<T>>> GroupByToKeyValueList<TKey>(Func<T, TKey> keySelector)
+        {
+            var groupedData = new Dictionary<TKey, List<T>>();
+
+            foreach (var item in data)
+            {
+                var key = keySelector(item);
+                if (!groupedData.ContainsKey(key))
+                {
+                    groupedData[key] = new List<T>();
+                }
+                groupedData[key].Add(item); 
+            }
+
+            return groupedData.ToList();
+        }
+
 
         public double Average(Func<T, double> selector)
         {
@@ -208,20 +230,23 @@ namespace LikeLinq
             return sum;
         }
 
-        public LinqService<TResult> Join<TKey, TResult>(
-            IEnumerable<T> outer,
-            IEnumerable<T> inner,
+        public LinqService<TResult> Join<TInner, TKey, TResult>(
+            IEnumerable<TInner> inner,
             Func<T, TKey> outerKeySelector,
-            Func<T, TKey> innerKeySelector,
-            Func<T, T, TResult> resultSelector)
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector)
         {
             var result = new List<TResult>();
 
-            foreach (var outerItem in outer)
+            foreach (var outerItem in data)
             {
+                var outerKey = outerKeySelector(outerItem);
+
                 foreach (var innerItem in inner)
                 {
-                    if (outerKeySelector(outerItem).Equals(innerKeySelector(innerItem)))
+                    var innerKey = innerKeySelector(innerItem);
+
+                    if (EqualityComparer<TKey>.Default.Equals(outerKey, innerKey))
                     {
                         result.Add(resultSelector(outerItem, innerItem));
                     }
@@ -230,6 +255,7 @@ namespace LikeLinq
 
             return new LinqService<TResult>(result);
         }
+
 
     }
 
@@ -246,6 +272,17 @@ namespace LikeLinq
             Name = name;
             Age = age;
             Grade = grade;
+        }
+    }
+    public class Score
+    {
+        public int StudentId { get; }
+        public double ScoreValue { get; }
+
+        public Score(int studentId, double scoreValue)
+        {
+            StudentId = studentId;
+            ScoreValue = scoreValue;
         }
     }
 
