@@ -1,0 +1,7 @@
+D:\Mentorship_Program\LearnADO\LearnADO\bin\Debug\LearnADO.exe.config
+D:\Mentorship_Program\LearnADO\LearnADO\bin\Debug\LearnADO.exe
+D:\Mentorship_Program\LearnADO\LearnADO\bin\Debug\LearnADO.pdb
+D:\Mentorship_Program\LearnADO\LearnADO\obj\Debug\LearnADO.csproj.AssemblyReference.cache
+D:\Mentorship_Program\LearnADO\LearnADO\obj\Debug\LearnADO.csproj.CoreCompileInputs.cache
+D:\Mentorship_Program\LearnADO\LearnADO\obj\Debug\LearnADO.exe
+D:\Mentorship_Program\LearnADO\LearnADO\obj\Debug\LearnADO.pdb
