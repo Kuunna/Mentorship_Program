@@ -42,15 +42,22 @@ CREATE TABLE [Dim_User] (
 )
 GO
 
-CREATE TABLE [Dim_Time] (
-  [TimeID] INT PRIMARY KEY,
-  [Date] DATE,
-  [Year] INT,
-  [Month] INT,
-  [Day] INT,
-  [Week] INT,
-  [Quarter] INT
+CREATE TABLE [Dim_Date]
+(	[DateKey] INT primary key, 
+	[Date] DATETIME,
+	[Weekday] INT,
+	[DayName] VARCHAR(9), 
+	[DayOfWeek] INT,
+	[DayOfMonth] INT,
+	[DayOfYear] INT,
+	[Month] INT, 
+	[MonthName] VARCHAR(9),
+	[Quarter] INT,
+	[Year] INT,
+	[MonthYear] CHAR(10), 
+	[MM-YYYY] CHAR(6),
 )
+
 GO
 
 CREATE TABLE [Fact_Article_Interaction] (
@@ -116,82 +123,3 @@ CREATE TABLE [User_Tag] (
   [InterestLevel] NVARCHAR(50),
   [FollowDate] INT
 )
-GO
-
-ALTER TABLE [Fact_News] ADD FOREIGN KEY ([PublishedDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Fact_News] ADD FOREIGN KEY ([SourceID]) REFERENCES [Dim_Source] ([SourceID])
-GO
-
-ALTER TABLE [Fact_News] ADD FOREIGN KEY ([TopicID]) REFERENCES [Dim_Category] ([CategoryID])
-GO
-
-ALTER TABLE [Dim_Source] ADD FOREIGN KEY ([LastUpdated]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Dim_User] ADD FOREIGN KEY ([JoinDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Dim_User] ADD FOREIGN KEY ([LastLogin]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Fact_Article_Interaction] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [Fact_Article_Interaction] ADD FOREIGN KEY ([NewsID]) REFERENCES [Fact_News] ([NewID])
-GO
-
-ALTER TABLE [Fact_Article_Interaction] ADD FOREIGN KEY ([InteractionDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Fact_Comments] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [Fact_Comments] ADD FOREIGN KEY ([NewsID]) REFERENCES [Fact_News] ([NewID])
-GO
-
-ALTER TABLE [Fact_Comments] ADD FOREIGN KEY ([CommentDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Fact_Bookmark] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [Fact_Bookmark] ADD FOREIGN KEY ([NewsID]) REFERENCES [Fact_News] ([NewID])
-GO
-
-ALTER TABLE [Fact_Bookmark] ADD FOREIGN KEY ([BookmarkDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [Fact_History] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [Fact_History] ADD FOREIGN KEY ([NewsID]) REFERENCES [Fact_News] ([NewID])
-GO
-
-ALTER TABLE [Fact_History] ADD FOREIGN KEY ([ReadDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [News_Tag] ADD FOREIGN KEY ([NewsID]) REFERENCES [Fact_News] ([NewID])
-GO
-
-ALTER TABLE [News_Tag] ADD FOREIGN KEY ([TagID]) REFERENCES [Dim_Tag] ([TagID])
-GO
-
-ALTER TABLE [User_Source] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [User_Source] ADD FOREIGN KEY ([SourceID]) REFERENCES [Dim_Source] ([SourceID])
-GO
-
-ALTER TABLE [User_Source] ADD FOREIGN KEY ([FollowDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
-
-ALTER TABLE [User_Tag] ADD FOREIGN KEY ([UserID]) REFERENCES [Dim_User] ([UserID])
-GO
-
-ALTER TABLE [User_Tag] ADD FOREIGN KEY ([TagID]) REFERENCES [Dim_Tag] ([TagID])
-GO
-
-ALTER TABLE [User_Tag] ADD FOREIGN KEY ([FollowDate]) REFERENCES [Dim_Time] ([TimeID])
-GO
