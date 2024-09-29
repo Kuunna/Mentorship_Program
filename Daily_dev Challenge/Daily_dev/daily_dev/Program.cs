@@ -7,6 +7,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<NewsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add Swagger services
+builder.Services.AddEndpointsApiExplorer();  // Required for minimal APIs
+builder.Services.AddSwaggerGen();  // Add Swagger generation service
+
 var app = builder.Build();
 
 
