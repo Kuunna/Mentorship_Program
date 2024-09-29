@@ -1,43 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using daily_dev.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace daily_dev.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class newsController : ControllerBase
+    public class NewsController : ControllerBase
     {
-        // GET: api/<newsController>
+        private readonly NewsDbContext _context;
+
+        public NewsController(NewsDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetNews()
         {
-            return new string[] { "value1", "value2" };
+            var newsList = await _context.Fact_News.ToListAsync();
+            return Ok(newsList);
         }
 
-        // GET api/<newsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{newsId}")]
+        public async Task<IActionResult> GetNewsById(int newsId)
         {
-            return "value";
+            var news = await _context.Fact_News.FindAsync(newsId);
+            if (news == null)
+                return NotFound();
+            return Ok(news);
         }
 
-        // POST api/<newsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> AddNews(Fact_News news)
         {
-        }
-
-        // PUT api/<newsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<newsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _context.Fact_News.Add(news);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetNewsById), new { newsId = news.NewID }, news);
         }
     }
+
 }

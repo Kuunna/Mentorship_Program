@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\truon\\source\\repos\\Daily_dev\\",
+  "WorkspaceRootPath": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|c:\\users\\truon\\source\\repos\\daily_dev\\daily_dev\\controllers\\sourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\sourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\models\\fact_bookmark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\models\\fact_bookmark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|c:\\users\\truon\\source\\repos\\daily_dev\\daily_dev\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|c:\\users\\truon\\source\\repos\\daily_dev\\daily_dev\\controllers\\tagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\tagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\interactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\interactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 656,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "tagController.cs",
-              "DocumentMoniker": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\tagController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\tagController.cs",
-              "ToolTip": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\tagController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\tagController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T22:11:12.972Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "sourceController.cs",
-              "DocumentMoniker": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\sourceController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\sourceController.cs",
-              "ToolTip": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\sourceController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\sourceController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBkAAAASAAAAAAAAAA==",
+              "Title": "Fact_Bookmark.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Models\\Fact_Bookmark.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Models\\Fact_Bookmark.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Models\\Fact_Bookmark.cs",
+              "RelativeToolTip": "daily_dev\\Models\\Fact_Bookmark.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T22:10:47.535Z",
+              "WhenOpened": "2024-09-29T09:49:23.319Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "newsController.cs",
-              "DocumentMoniker": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\newsController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\newsController.cs",
-              "ToolTip": "C:\\Users\\truon\\source\\repos\\Daily_dev\\daily_dev\\Controllers\\newsController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\newsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
+              "Title": "InteractionsController.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionsController.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Controllers\\InteractionsController.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionsController.cs",
+              "RelativeToolTip": "daily_dev\\Controllers\\InteractionsController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBsAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T22:09:05.455Z",
+              "WhenOpened": "2024-09-29T09:45:28.767Z",
               "EditorCaption": ""
             }
           ]
