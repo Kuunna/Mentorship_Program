@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\interactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\interactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Program.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Program.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Program.cs",
-              "RelativeToolTip": "daily_dev\\Program.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAaAAAAAAAAAA==",
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "daily_dev\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T10:05:33.312Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InteractionsController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionsController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\InteractionsController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionsController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\InteractionsController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T09:45:28.767Z",
+              "WhenOpened": "2024-09-29T12:53:29.288Z",
               "EditorCaption": ""
             }
           ]
