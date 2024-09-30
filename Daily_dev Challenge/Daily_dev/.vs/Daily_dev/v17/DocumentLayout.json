@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\interactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\interactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\sourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\sourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\tagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\tagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|d:\\mentorship_program\\daily_dev challenge\\daily_dev\\daily_dev\\controllers\\bookmarkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9977D4B6-0B87-4717-A7B5-FB0C96506CCC}|daily_dev\\daily_dev.csproj|solutionrelative:daily_dev\\controllers\\bookmarkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,66 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "InteractionController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\InteractionController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\InteractionController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\InteractionController.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAswBgAAAAAAAAAAAAAAA==",
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "daily_dev\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAcwF4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:16:53.094Z",
+              "WhenOpened": "2024-09-30T18:36:23.285Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "NewsController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\NewsController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\NewsController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\NewsController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\NewsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "Title": "HistoryController.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\HistoryController.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Controllers\\HistoryController.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\HistoryController.cs",
+              "RelativeToolTip": "daily_dev\\Controllers\\HistoryController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAcwGkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:15:44.277Z",
+              "WhenOpened": "2024-09-30T18:35:40.926Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SourceController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\SourceController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\SourceController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\SourceController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\SourceController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:15:40.571Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\UserController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:15:34.725Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TagController.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\TagController.cs",
-              "RelativeDocumentMoniker": "daily_dev\\Controllers\\TagController.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\TagController.cs",
-              "RelativeToolTip": "daily_dev\\Controllers\\TagController.cs",
+              "Title": "BookmarkController.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\BookmarkController.cs",
+              "RelativeDocumentMoniker": "daily_dev\\Controllers\\BookmarkController.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Daily_dev Challenge\\Daily_dev\\daily_dev\\Controllers\\BookmarkController.cs",
+              "RelativeToolTip": "daily_dev\\Controllers\\BookmarkController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:14:58.101Z",
+              "WhenOpened": "2024-09-30T18:34:42.021Z",
               "EditorCaption": ""
             }
           ]
