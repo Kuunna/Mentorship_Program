@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Answer.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Models\\Answer.cs",
+              "RelativeDocumentMoniker": "Quiz\\Models\\Answer.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Models\\Answer.cs",
+              "RelativeToolTip": "Quiz\\Models\\Answer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T10:17:56.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Question.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Models\\Question.cs",
+              "RelativeDocumentMoniker": "Quiz\\Models\\Question.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Models\\Question.cs",
+              "RelativeToolTip": "Quiz\\Models\\Question.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T10:17:46.657Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
