@@ -12,7 +12,7 @@ CREATE TABLE Question (
     [Format] NVARCHAR(50) NOT NULL,            -- Định dạng câu hỏi (HTML, Text, etc.)
     LevelId INT NOT NULL,                    -- Khóa ngoại tham chiếu đến bảng Level
     TopicId INT NOT NULL,                    -- Khóa ngoại tham chiếu đến bảng Topic
-    QuestionTypeId INT NOT NULL               -- Loại câu hỏi (trắc nghiệm, tự luận, v.v.)
+    TypeId INT NOT NULL               -- Loại câu hỏi (trắc nghiệm, tự luận, v.v.)
 );
 
 CREATE TABLE QuizQuestion (
@@ -38,8 +38,26 @@ CREATE TABLE QuestionAnswer (
 
 CREATE TABLE Topic (
     Id INT PRIMARY KEY IDENTITY(1,1), 
-    [Name] NVARCHAR(255) NOT NULL,             -- Tên chủ đề
+    TopicName NVARCHAR(255) NOT NULL,             -- Tên chủ đề
     ParentTopicId INT NULL                    -- Khóa ngoại tham chiếu đến chủ đề cha (nếu có)
+);
+
+CREATE TABLE [Type] (
+    Id INT PRIMARY KEY IDENTITY,
+    TypeName NVARCHAR(50) NOT NULL -- Loại câu hỏi (ví dụ: Trắc nghiệm, Tự luận, Điền vào chỗ trống, etc.)
+);
+
+CREATE TABLE Tag (
+    Id INT PRIMARY KEY IDENTITY,
+    TagName NVARCHAR(50) NOT NULL -- Tên thẻ cho quiz (ví dụ: SQL, C#, Algorithm, etc.)
+);
+
+CREATE TABLE QuizTag (
+    Id INT PRIMARY KEY IDENTITY,
+    QuizId INT NOT NULL,          -- Khóa ngoại đến bảng Quiz
+    TagId INT NOT NULL,           -- Khóa ngoại đến bảng Tag
+    FOREIGN KEY (QuizId) REFERENCES Quiz(Id),
+    FOREIGN KEY (TagId) REFERENCES Tag(Id)
 );
 
 CREATE TABLE [Level] (
@@ -49,6 +67,11 @@ CREATE TABLE [Level] (
     TimeConstraint INT NOT NULL                -- Thời gian ràng buộc cho cấp độ (phút)
 );
 
+CREATE TABLE [Role] (
+    Id INT PRIMARY KEY IDENTITY(1,1), 
+	RoleName NVARCHAR(50) NOT NULL
+);
+
 CREATE TABLE [User] (
     Id INT PRIMARY KEY IDENTITY(1,1), 
     UserName NVARCHAR(50) NOT NULL,          -- Tên người dùng
@@ -56,6 +79,12 @@ CREATE TABLE [User] (
     [Password] NVARCHAR(255) NOT NULL,         -- Mật khẩu
     CreatedAt DATETIME DEFAULT GETDATE(),    -- Thời gian tạo tài khoản
     UpdatedAt DATETIME DEFAULT GETDATE()     -- Thời gian cập nhật tài khoản
+);
+
+CREATE TABLE [UserRole] (
+    Id INT PRIMARY KEY IDENTITY(1,1), 
+    UserId INT NOT NULL,
+	RoleId INT NOT NULL
 );
 
 CREATE TABLE UserQuiz (
