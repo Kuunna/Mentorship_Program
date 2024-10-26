@@ -9,7 +9,7 @@ namespace QuizChallenge.Models
         public string Format { get; set; }
         public int LevelId { get; set; }
         public int TopicId { get; set; }
-        public int QuestionTypeId { get; set; }
+        public int TypeId { get; set; }
 
         public Level Level { get; set; }
         public Topic Topic { get; set; }

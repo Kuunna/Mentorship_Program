@@ -46,6 +46,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
             "Microsoft.AspNet.WebApi.OData": {
               "target": "Package",
               "version": "[5.7.0, )"
