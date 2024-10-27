@@ -4,10 +4,9 @@
     {
         public int Id { get; set; }
         public string TopicName { get; set; }
-        public int? ParentTopicId { get; set; }
+        public int? ParentTopicID { get; set; }
 
-        public Topic ParentTopic { get; set; }
-        public ICollection<Topic> SubTopics { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public ICollection<Question> Questions { get; set; } = new List<Question>();
+        public ICollection<QuizTag> QuizTags { get; set; } = new List<QuizTag>();
     }
 }

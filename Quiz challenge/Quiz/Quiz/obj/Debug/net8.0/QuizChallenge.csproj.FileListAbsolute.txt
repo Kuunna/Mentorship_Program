@@ -1,0 +1,8 @@
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.csproj.AssemblyReference.cache
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.AssemblyInfoInputs.cache
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.AssemblyInfo.cs
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.csproj.CoreCompileInputs.cache
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.MvcApplicationPartsAssemblyInfo.cs
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.MvcApplicationPartsAssemblyInfo.cache
+D:\Mentorship_Program\Quiz challenge\Quiz\Quiz\obj\Debug\net8.0\QuizChallenge.sourcelink.json

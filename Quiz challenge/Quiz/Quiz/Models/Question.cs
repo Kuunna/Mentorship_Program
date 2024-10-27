@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace QuizChallenge.Models
+﻿namespace QuizChallenge.Models
 {
     public class Question
     {
@@ -13,7 +11,7 @@ namespace QuizChallenge.Models
 
         public Level Level { get; set; }
         public Topic Topic { get; set; }
-        public ICollection<QuizQuestion> QuizQuestions { get; set; }
-        public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
+        public Type Type { get; set; }
+        public ICollection<QuestionAnswer> QuestionAnswers { get; set; } = new List<QuestionAnswer>();
     }
 }

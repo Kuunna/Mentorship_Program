@@ -8,7 +8,7 @@
         public string Description { get; set; }
         public int TimeLimit { get; set; }
 
-        public ICollection<QuizQuestion> QuizQuestions { get; set; }
-        public ICollection<UserQuiz> UserQuizzes { get; set; }
+        public ICollection<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+        public ICollection<QuizTag> QuizTags { get; set; } = new List<QuizTag>();
     }
 }

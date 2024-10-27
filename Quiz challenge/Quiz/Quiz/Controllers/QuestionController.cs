@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuizChallenge.Models;
+using QuizChallenge.Repositories;
 using Microsoft.AspNetCore.OData.Query;
 
 namespace QuizChallenge.Controllers
@@ -9,9 +10,9 @@ namespace QuizChallenge.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly IQuestionRepository _questionRepository;
+        private readonly QuestionRepository _questionRepository;
 
-        public QuestionController(IQuestionRepository questionRepository)
+        public QuestionController(QuestionRepository questionRepository)
         {
             _questionRepository = questionRepository;
         }

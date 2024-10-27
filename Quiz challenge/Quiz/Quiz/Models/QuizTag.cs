@@ -2,7 +2,6 @@
 {
     public class QuizTag
     {
-        public int Id { get; set; }
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
 

@@ -1,38 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\repositories\\quizrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\repositories\\quizrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "QuizRepo.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\QuizRepo.cs",
-              "RelativeDocumentMoniker": "Quiz\\Repositories\\QuizRepo.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\QuizRepo.cs",
-              "RelativeToolTip": "Quiz\\Repositories\\QuizRepo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T13:21:47.541Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
