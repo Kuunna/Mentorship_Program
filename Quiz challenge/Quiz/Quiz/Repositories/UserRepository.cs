@@ -84,6 +84,33 @@ namespace QuizChallenge.Repositories
             return null;
         }
 
+        public User GetUserByUsername(string email)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT * FROM Users WHERE UserName = @UserName", connection);
+                command.Parameters.AddWithValue("@UserName", email);
+
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new User
+                        {
+                            Id = (int)reader["Id"],
+                            UserName = reader["UserName"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            Password = reader["Password"].ToString(),
+                            CreatedAt = (DateTime)reader["CreatedAt"],
+                            UpdatedAt = (DateTime)reader["UpdatedAt"]
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
         public void UpdateUser(User user)
         {
             using (var connection = new SqlConnection(_connectionString))
