@@ -57,15 +57,40 @@ namespace QuizChallenge.Repositories
             return null;
         }
 
-        public List<Question> GetQuestionsByLevelIdAndTopicId(int levelId, int topicId)
+        public List<Question> GetQuestionsByLevel(string level)
         {
             var questions = new List<Question>();
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Questions WHERE LevelId = @LevelId AND TopicId = @TopicId", connection);
-                command.Parameters.AddWithValue("@LevelId", levelId);
-                command.Parameters.AddWithValue("@TopicId", topicId);
+                var command = new SqlCommand("SELECT * FROM Questions WHERE LevelId = (SELECT Id FROM Levels WHERE LevelName = @Level)", connection);
+                command.Parameters.AddWithValue("@Level", level);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        questions.Add(new Question
+                        {
+                            Id = (int)reader["Id"],
+                            Content = reader["Content"].ToString(),
+                            Format = reader["Format"].ToString(),
+                            LevelId = (int)reader["LevelId"],
+                            TopicId = (int)reader["TopicId"],
+                            TypeId = (int)reader["TypeId"]
+                        });
+                    }
+                }
+            }
+            return questions;
+        }
 
+        public List<Question> GetQuestionsByTopic(string topic)
+        {
+            var questions = new List<Question>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT * FROM Questions WHERE TopicId = (SELECT Id FROM Topics WHERE TopicName = @Topic)", connection);
+                command.Parameters.AddWithValue("@Topic", topic);
                 connection.Open();
                 using (var reader = command.ExecuteReader())
                 {

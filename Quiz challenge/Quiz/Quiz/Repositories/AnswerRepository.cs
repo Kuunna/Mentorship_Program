@@ -79,6 +79,36 @@ namespace QuizChallenge.Repositories
             return answers;
         }
 
+        public List<Answer> GetCorrectAnswersForQuestion(int questionId)
+        {
+            var correctAnswers = new List<Answer>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand(@"
+                SELECT a.* 
+                FROM Answer a
+                JOIN QuestionAnswer qa ON a.Id = qa.AnswerId
+                WHERE qa.QuestionId = @QuestionId AND a.IsCorrect = 1", connection);
+                command.Parameters.AddWithValue("@QuestionId", questionId);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        correctAnswers.Add(new Answer
+                        {
+                            Id = (int)reader["Id"],
+                            AnswerText = reader["AnswerText"].ToString(),
+                            IsCorrect = (bool)reader["IsCorrect"],
+                            IsDynamic = (bool)reader["IsDynamic"],
+                            CanBeSuggested = (bool)reader["CanBeSuggested"]
+                        });
+                    }
+                }
+            }
+            return correctAnswers;
+        }
+
         public void UpdateAnswer(Answer answer)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -104,5 +134,7 @@ namespace QuizChallenge.Repositories
                 command.ExecuteNonQuery();
             }
         }
+
+        
     }
 }

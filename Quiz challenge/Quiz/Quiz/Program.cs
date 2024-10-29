@@ -46,8 +46,11 @@ builder.Services.AddScoped<TypeRepository>(provider => new TypeRepository(connec
 builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
 builder.Services.AddScoped<UserQuizRepository>(provider => new UserQuizRepository(connectionString));
 builder.Services.AddScoped<UserRoleRepository>(provider => new UserRoleRepository(connectionString));
+builder.Services.AddScoped<UserAnswerRepository>(provider => new UserAnswerRepository(connectionString));
 
-
+// Add Services to the DI container
+builder.Services.AddScoped<AnswerService>();
+builder.Services.AddScoped<QuestionService>();
 
 var app = builder.Build();
 

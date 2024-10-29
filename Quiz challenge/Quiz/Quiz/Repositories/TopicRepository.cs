@@ -15,8 +15,9 @@ namespace QuizChallenge.Repositories
         public void AddTopic(Topic topic)
         {
             using var connection = new SqlConnection(_connectionString);
-            var command = new SqlCommand("INSERT INTO Topic (TopicName) VALUES (@TopicName)", connection);
+            var command = new SqlCommand("INSERT INTO Topic (TopicName, ParentTopicId) VALUES (@TopicName, @ParentTopicId)", connection);
             command.Parameters.AddWithValue("@TopicName", topic.TopicName);
+            command.Parameters.AddWithValue("@ParentTopicId", (object)topic.ParentTopicId ?? DBNull.Value);
             connection.Open();
             command.ExecuteNonQuery();
         }
@@ -34,7 +35,8 @@ namespace QuizChallenge.Repositories
                 return new Topic
                 {
                     Id = (int)reader["Id"],
-                    TopicName = reader["TopicName"].ToString()
+                    TopicName = reader["TopicName"].ToString(),
+                    ParentTopicId = reader["ParentTopicId"] as int?
                 };
             }
             return null;
@@ -53,7 +55,8 @@ namespace QuizChallenge.Repositories
                 topics.Add(new Topic
                 {
                     Id = (int)reader["Id"],
-                    TopicName = reader["TopicName"].ToString()
+                    TopicName = reader["TopicName"].ToString(),
+                    ParentTopicId = reader["ParentTopicId"] as int?
                 });
             }
             return topics;
@@ -62,9 +65,10 @@ namespace QuizChallenge.Repositories
         public void UpdateTopic(Topic topic)
         {
             using var connection = new SqlConnection(_connectionString);
-            var command = new SqlCommand("UPDATE Topic SET TopicName = @TopicName WHERE Id = @Id", connection);
+            var command = new SqlCommand("UPDATE Topic SET TopicName = @TopicName, ParentTopicId = @ParentTopicId WHERE Id = @Id", connection);
             command.Parameters.AddWithValue("@Id", topic.Id);
             command.Parameters.AddWithValue("@TopicName", topic.TopicName);
+            command.Parameters.AddWithValue("@ParentTopicId", (object)topic.ParentTopicId ?? DBNull.Value);
             connection.Open();
             command.ExecuteNonQuery();
         }

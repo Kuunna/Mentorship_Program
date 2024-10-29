@@ -1,5 +1,6 @@
 ﻿using QuizChallenge.Models;
 using QuizChallenge.Repositories;
+using System.Linq;
 
 namespace QuizChallenge.Services
 {
@@ -26,9 +27,9 @@ namespace QuizChallenge.Services
 
         public void UpdateUserProfile(User user) => _userRepository.UpdateUser(user);
 
-        //public void AssignRoleToUser(int userId, int roleId) => _roleRepository.AssignRoleToUser(userId, roleId);
+        public void AssignRoleToUser(int userId, int roleId) => _roleRepository.AssignRoleToUser(userId, roleId);
 
-        //public List<Role> GetUserRoles(int userId) => _roleRepository.GetRolesByUserId(userId);
+        public List<Role> GetUserRoles(int userId) => _roleRepository.GetRolesByUserId(userId);
     }
 
 }
