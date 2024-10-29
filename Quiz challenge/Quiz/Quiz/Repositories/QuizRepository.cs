@@ -80,6 +80,32 @@ namespace QuizChallenge.Repositories
             return quizzes;
         }
 
+        public void AddQuestionToQuiz(int quizId, int questionId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("INSERT INTO QuizQuestions (QuizId, QuestionId) VALUES (@QuizId, @QuestionId)", connection);
+                command.Parameters.AddWithValue("@QuizId", quizId);
+                command.Parameters.AddWithValue("@QuestionId", questionId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void RemoveQuestionFromQuiz(int quizId, int questionId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("DELETE FROM QuizQuestions WHERE QuizId = @QuizId AND QuestionId = @QuestionId", connection);
+                command.Parameters.AddWithValue("@QuizId", quizId);
+                command.Parameters.AddWithValue("@QuestionId", questionId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         public void UpdateQuiz(Quiz quiz)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -106,5 +132,33 @@ namespace QuizChallenge.Repositories
                 command.ExecuteNonQuery();
             }
         }
+        public QuizResult GetQuizResults(int quizId, int userId)
+        {
+            // Giả định có một bảng QuizResults để lưu điểm số
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT Score, TotalQuestions FROM QuizResults WHERE QuizId = @QuizId AND UserId = @UserId", connection);
+                command.Parameters.AddWithValue("@QuizId", quizId);
+                command.Parameters.AddWithValue("@UserId", userId);
+
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new QuizResult
+                        {
+                            Score = reader.GetInt32(0),
+                            TotalQuestions = reader.GetInt32(1)
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
+    public class QuizResult
+    {
     }
 }

@@ -16,11 +16,19 @@ namespace QuizChallenge.Services
             _userAnswerRepository = userAnswerRepository;
         }
 
+        public void AddAnswer(Answer answer) => _answerRepository.AddAnswer(answer);
+
+        public Answer GetAnswerById(int id) => _answerRepository.GetAnswerById(id);
+
+        public List<Answer> GetAnswersByQuestionId(int questionId) => _answerRepository.GetAnswersByQuestionId(questionId);
+
+        public void UpdateAnswer(Answer answer) => _answerRepository.UpdateAnswer(answer);
+
+        public void DeleteAnswer(int answerId) => _answerRepository.DeleteAnswer(answerId);
+
         public void SaveUserAnswer(UserAnswer userAnswer) => _userAnswerRepository.AddUserAnswer(userAnswer);
 
         public List<Answer> GetCorrectAnswersForQuestion(int questionId) => _answerRepository.GetCorrectAnswersForQuestion(questionId);
-
-        public List<UserAnswer> GetUserAnswersForQuiz(int userQuizId) => _userAnswerRepository.GetUserAnswersByUserQuizId(userQuizId);
 
         public bool EvaluateAnswers(int userQuizId, List<UserAnswer> userAnswers)
         {
@@ -29,7 +37,6 @@ namespace QuizChallenge.Services
             foreach (var userAnswer in userAnswers)
             {
                 var correctAnswers = GetCorrectAnswersForQuestion(userAnswer.QuestionId);
-
                 var isAnswerCorrect = correctAnswers.Any(ca => ca.Id == userAnswer.AnswerId && ca.IsCorrect);
 
                 if (!isAnswerCorrect)
@@ -41,4 +48,5 @@ namespace QuizChallenge.Services
             return isAllCorrect;
         }
     }
+
 }

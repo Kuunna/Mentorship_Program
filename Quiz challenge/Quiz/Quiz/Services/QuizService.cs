@@ -16,15 +16,19 @@ namespace QuizChallenge.Services
 
         public void CreateQuiz(Quiz quiz) => _quizRepository.AddQuiz(quiz);
 
-        public Quiz GetQuiz(int quizId) => _quizRepository.GetQuizById(quizId);
+        public Quiz GetQuizById(int quizId) => _quizRepository.GetQuizById(quizId);
 
-        //public List<Quiz> GetQuizzesByCriteria(string criteria) => _quizRepository.GetQuizzesByCriteria(criteria);
+        public void AddQuestionToQuiz(int quizId, int questionId) => _quizRepository.AddQuestionToQuiz(quizId, questionId);
 
-        //public void AddQuestionToQuiz(int quizId, int questionId) => _quizRepository.AddQuestionToQuiz(quizId, questionId);
+        public void RemoveQuestionFromQuiz(int quizId, int questionId) => _quizRepository.RemoveQuestionFromQuiz(quizId, questionId);
 
-        //public void SaveQuizResult(QuizResult quizResult) => _quizRepository.SaveQuizResult(quizResult);
+        public void SubmitAnswer(int quizId, int questionId, Answer answer)
+        {
+            // Giả định có một phương thức lưu câu trả lời
+            // Lưu câu trả lời vào cơ sở dữ liệu (có thể trong một bảng Answer hoặc UserAnswers)
+        }
 
-        //public List<QuizResult> GetQuizResultsByUser(int userId) => _quizRepository.GetQuizResultsByUser(userId);
+        public QuizResult GetQuizResults(int quizId, int userId) => _quizRepository.GetQuizResults(quizId, userId);
     }
 
 }

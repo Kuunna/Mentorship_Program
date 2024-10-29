@@ -14,16 +14,19 @@ namespace QuizChallenge.Services
             _userRepository = userRepository;
             _roleRepository = roleRepository;
         }
-
-        public void RegisterUser(User user) => _userRepository.AddUser(user);
-
         public User AuthenticateUser(string username, string password)
         {
             var user = _userRepository.GetUserByUsername(username);
             return (user != null && user.Password == password) ? user : null;
         }
 
-        public User GetUserProfile(int userId) => _userRepository.GetUserById(userId);
+        public void CreateUser(User user) => _userRepository.AddUser(user);
+
+        public User GetUserById(int id) => _userRepository.GetUserById(id);
+
+        public void UpdateUser(User user) => _userRepository.UpdateUser(user);
+
+        public void DeleteUser(int userId) => _userRepository.DeleteUser(userId);
 
         public void UpdateUserProfile(User user) => _userRepository.UpdateUser(user);
 
@@ -31,5 +34,4 @@ namespace QuizChallenge.Services
 
         public List<Role> GetUserRoles(int userId) => _roleRepository.GetRolesByUserId(userId);
     }
-
 }

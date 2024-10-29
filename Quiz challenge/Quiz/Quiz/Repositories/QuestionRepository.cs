@@ -111,6 +111,31 @@ namespace QuizChallenge.Repositories
             return questions;
         }
 
+        public List<Models.Type> GetQuestionTypes()
+        {
+            var questionTypes = new List<Models.Type>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT Id, TypeName FROM Types", connection);
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        questionTypes.Add(new Models.Type
+                        {
+                            Id = reader.GetInt32(0),
+                            TypeName = reader.GetString(1)
+                        });
+                    }
+                }
+            }
+
+            return questionTypes;
+        }
+
         public void UpdateQuestion(Question question)
         {
             using (var connection = new SqlConnection(_connectionString))

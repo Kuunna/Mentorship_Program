@@ -44,6 +44,11 @@ namespace QuizChallenge.Services
             return _answerRepository.GetCorrectAnswersForQuestion(questionId);
         }
 
+        public List<Models.Type> GetQuestionTypes()
+        {
+            return _questionRepository.GetQuestionTypes();
+        }
+
         public void UpdateQuestion(Question question)
         {
             _questionRepository.UpdateQuestion(question);
