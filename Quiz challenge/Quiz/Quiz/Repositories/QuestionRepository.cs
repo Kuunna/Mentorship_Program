@@ -57,6 +57,38 @@ namespace QuizChallenge.Repositories
             return null;
         }
 
+        public List<Question> GetQuestionsByQuizId(int quizId)
+        {
+            var questions = new List<Question>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand(@"SELECT * FROM Questions 
+                                               WHERE Id IN (
+                                                    SELECT QuestionId 
+                                                    FROM QuizQuestions 
+                                                    WHERE QuizId = @QuizId
+                                                    )", connection);
+                command.Parameters.AddWithValue("@QuizId", quizId);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        questions.Add(new Question
+                        {
+                            Id = (int)reader["Id"],
+                            Content = reader["Content"].ToString(),
+                            Format = reader["Format"].ToString(),
+                            LevelId = (int)reader["LevelId"],
+                            TopicId = (int)reader["TopicId"],
+                            TypeId = (int)reader["TypeId"]
+                        });
+                    }
+                }
+            }
+            return questions;
+        }
+
         public List<Question> GetQuestionsByLevel(string level)
         {
             var questions = new List<Question>();
@@ -162,6 +194,49 @@ namespace QuizChallenge.Repositories
 
                 connection.Open();
                 command.ExecuteNonQuery();
+            }
+        }
+        public bool IsCorrectAnswer(int questionId, Answer answer)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand(@"
+                SELECT COUNT(*)
+                FROM QuestionAnswer qa
+                JOIN Answers a ON qa.AnswerId = a.Id
+                WHERE qa.QuestionId = @QuestionId AND a.IsCorrect = 1 AND a.Id = @AnswerId", connection);
+                command.Parameters.AddWithValue("@QuestionId", questionId);
+                command.Parameters.AddWithValue("@AnswerId", answer.Id);
+
+                connection.Open();
+                var result = (int)command.ExecuteScalar();
+                return result > 0; 
+            }
+        }
+
+        public double GetScoreWeightByLevel(int levelId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT ScoreWeight FROM Levels WHERE Id = @LevelId", connection);
+                command.Parameters.AddWithValue("@LevelId", levelId);
+                connection.Open();
+
+                var scoreWeight = command.ExecuteScalar();
+                return scoreWeight != null ? (double)scoreWeight : 0;
+            }
+        }
+
+        public int GetQuestionIdByAnswerId(int answerId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand(@" SELECT QuestionId FROM QuestionAnswer WHERE AnswerId = @AnswerId", connection);
+                command.Parameters.AddWithValue("@AnswerId", answerId);
+
+                connection.Open();
+                var result = command.ExecuteScalar();
+                return result != null ? (int)result : -1; // Trả về -1 nếu không tìm thấy
             }
         }
     }

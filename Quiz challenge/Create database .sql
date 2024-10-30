@@ -60,6 +60,7 @@ CREATE TABLE QuizTag (
     FOREIGN KEY (TagId) REFERENCES Tag(Id)
 );
 
+
 CREATE TABLE [Level] (
     Id INT PRIMARY KEY IDENTITY(1,1), 
     LevelName NVARCHAR(50) NOT NULL,         -- Tên cấp độ (Easy, Medium, Hard)
@@ -92,7 +93,12 @@ CREATE TABLE UserQuiz (
     UserId INT NOT NULL,                     -- Khóa ngoại tham chiếu đến bảng User
     QuizId INT NOT NULL,                     -- Khóa ngoại tham chiếu đến bảng Quiz
     CompletionTime INT NOT NULL,              -- Thời gian hoàn thành quiz (phút)
-    AttemptAt DATETIME DEFAULT GETDATE()      -- Thời gian thực hiện quiz
+    AttemptAt DATETIME DEFAULT GETDATE(),      -- Thời gian thực hiện quiz
+	Score INT NOT NULL DEFAULT 0,             -- Điểm của người dùng cho quiz
+    TotalQuestions INT NOT NULL,              -- Tổng số câu hỏi trong quiz
+    CorrectAnswers INT NOT NULL DEFAULT 0,    -- Số lượng câu trả lời đúng
+    StartTime DATETIME DEFAULT GETDATE(),     -- Thời gian bắt đầu quiz
+    EndTime DATETIME NULL;                    -- Thời gian kết thúc quiz
 );
 
 CREATE TABLE UserAnswer (

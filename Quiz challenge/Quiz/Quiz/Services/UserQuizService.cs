@@ -1,27 +1,30 @@
-﻿using QuizChallenge.Repositories;
+﻿using QuizChallenge.Models;
+using QuizChallenge.Repositories;
 
 namespace QuizChallenge.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using QuizChallenge.Models;
+    using QuizChallenge.Repositories;
+
     public class UserQuizService
     {
-        private readonly QuizRepository _quizRepository;
+        private readonly UserQuizRepository _userQuizRepository;
 
-        public UserQuizService(QuizRepository quizRepository)
+        public UserQuizService(UserQuizRepository userQuizRepository)
         {
-            _quizRepository = quizRepository;
+            _userQuizRepository = userQuizRepository;
         }
 
-        //public List<QuizResult> GetUserQuizHistory(int userId) => _quizRepository.GetQuizResultsByUser(userId);
+        public UserQuiz GetQuizResultByUserId(int userId, int quizId) => _userQuizRepository.GetUserQuizByUserIdAndQuizId(userId, quizId);
 
-        //public int GetQuizScore(int userId, int quizId) => _quizRepository.GetQuizScore(userId, quizId);
+        public List<UserQuiz> GetUserQuizHistory(int userId) => _userQuizRepository.GetUserQuizByUserId(userId);
 
-        //public void SaveQuizCompletionTime(int userId, int quizId, DateTime completionTime) => _quizRepository.SaveQuizCompletionTime(userId, quizId, completionTime);
+        public void SaveQuizCompletionTime(int userId, int quizId, DateTime completionTime) => _userQuizRepository.SaveQuizCompletionTime(userId, quizId, completionTime);
 
-        //public QuizResult CalculateQuizResult(int userId, int quizId)
-        //{
-        //    var score = GetQuizScore(userId, quizId);
-        //    return new QuizResult { UserId = userId, QuizId = quizId, Score = score };
-        //}
+
+        //public List<UserLeaderboard> GetLeaderboard() => _userQuizRepository.GetLeaderboard();
+
     }
-
 }
