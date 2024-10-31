@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\services\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\services\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\services\\userquizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\services\\userquizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\repositories\\userquizrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\repositories\\userquizrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserQuizRepository.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\UserQuizRepository.cs",
-              "RelativeDocumentMoniker": "Quiz\\Repositories\\UserQuizRepository.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\UserQuizRepository.cs",
-              "RelativeToolTip": "Quiz\\Repositories\\UserQuizRepository.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T22:05:15.589Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserQuizService.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\UserQuizService.cs",
-              "RelativeDocumentMoniker": "Quiz\\Services\\UserQuizService.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\UserQuizService.cs",
-              "RelativeToolTip": "Quiz\\Services\\UserQuizService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "Quiz\\Repositories\\RoleRepository.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Repositories\\RoleRepository.cs",
+              "RelativeToolTip": "Quiz\\Repositories\\RoleRepository.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAQwIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T22:03:28.267Z",
+              "WhenOpened": "2024-10-31T20:42:51.082Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "QuizService.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\QuizService.cs",
-              "RelativeDocumentMoniker": "Quiz\\Services\\QuizService.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\QuizService.cs",
-              "RelativeToolTip": "Quiz\\Services\\QuizService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAqwEMAAAAJAAAAAAAAAA==",
+              "Title": "RoleService.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\RoleService.cs",
+              "RelativeDocumentMoniker": "Quiz\\Services\\RoleService.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\RoleService.cs",
+              "RelativeToolTip": "Quiz\\Services\\RoleService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T22:00:59.43Z",
+              "WhenOpened": "2024-10-31T20:11:37.118Z",
               "EditorCaption": ""
             }
           ]

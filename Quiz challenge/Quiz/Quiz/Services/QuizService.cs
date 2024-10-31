@@ -78,7 +78,7 @@ namespace QuizChallenge.Services
             }
         }
 
-        public double GetUserScoresByQuiz(int userId, int quizId) => _userQuizRepository.GetUserScoresByQuizId(userId, quizId);
+        public double GetUserScoresByUserIdQuizId(int userId, int quizId) => _userQuizRepository.GetUserScoresByQuizId(userId, quizId);
     }
 
 }

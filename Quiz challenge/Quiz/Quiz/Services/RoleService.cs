@@ -16,9 +16,9 @@ namespace QuizChallenge.Services
 
         public List<Role> GetRoles() => _roleRepository.GetAllRoles();
 
-        //public void AssignRoleToUser(int userId, int roleId) => _roleRepository.AssignRoleToUser(userId, roleId);
+        public void AssignRoleToUser(int userId, int roleId) => _roleRepository.AssignRoleToUser(userId, roleId);
 
-        //public List<User> GetUsersByRole(int roleId) => _roleRepository.GetUsersByRole(roleId);
+        public List<User> GetUsersByRole(int roleId) => _roleRepository.GetUsersByRoleId(roleId);
     }
 
 }

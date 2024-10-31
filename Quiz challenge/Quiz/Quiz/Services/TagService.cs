@@ -18,7 +18,7 @@ namespace QuizChallenge.Services
 
         public void AssignTagToQuiz(int quizId, int tagId) => _quizTagRepository.AddQuizTag(new QuizTag { QuizId = quizId, TagId = tagId });
 
-        //public List<Quiz> GetQuizzesByTag(int tagId) => _tagRepository.GetQuizzesByTag(tagId);
+        public List<Quiz> GetQuizzesByTag(int tagId) => _tagRepository.GetQuizzesByTag(tagId);
 
         public List<Tag> GetAllTags() => _tagRepository.GetAllTags();
     }

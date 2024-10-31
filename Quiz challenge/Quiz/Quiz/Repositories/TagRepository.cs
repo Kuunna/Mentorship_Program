@@ -77,5 +77,30 @@ namespace QuizChallenge.Repositories
             connection.Open();
             command.ExecuteNonQuery();
         }
+        public List<Quiz> GetQuizzesByTag(int tagId)
+        {
+            var quizzes = new List<Quiz>();
+            using var connection = new SqlConnection(_connectionString);
+            var command = new SqlCommand(@"SELECT q.Id, q.Title, q.CreatedAt, q.Description, q.TimeLimit
+                                           FROM Quiz q
+                                           INNER JOIN QuizTag qt ON q.Id = qt.QuizId
+                                           WHERE qt.TagId = @TagId", connection);
+            command.Parameters.AddWithValue("@TagId", tagId);
+            connection.Open();
+
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                quizzes.Add(new Quiz
+                {
+                    Id = (int)reader["Id"],
+                    Title = reader["Title"].ToString(),
+                    CreatedAt = (DateTime)reader["CreatedAt"],
+                    Description = reader["Description"].ToString(),
+                    TimeLimit = (int)reader["TimeLimit"]
+                });
+            }
+            return quizzes;
+        }
     }
 }

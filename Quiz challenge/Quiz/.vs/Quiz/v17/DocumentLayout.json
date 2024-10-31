@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiz\\services\\tagservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15590D3A-3810-4D36-80BF-84CCBD5B0135}|Quiz\\QuizChallenge.csproj|solutionrelative:quiz\\services\\tagservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiztest\\servicetests\\userquizservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|solutionrelative:quiztest\\servicetests\\userquizservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiztest\\servicetests\\typeservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|solutionrelative:quiztest\\servicetests\\typeservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiztest\\servicetests\\tagservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|solutionrelative:quiztest\\servicetests\\tagservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|d:\\mentorship_program\\quiz challenge\\quiz\\quiztest\\servicetests\\roleservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC6C05CF-533B-4937-9D52-97EF396BBAC8}|QuizTest\\QuizTest.csproj|solutionrelative:quiztest\\servicetests\\roleservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TagService.cs",
-              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\TagService.cs",
-              "RelativeDocumentMoniker": "Quiz\\Services\\TagService.cs",
-              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\Quiz\\Services\\TagService.cs",
-              "RelativeToolTip": "Quiz\\Services\\TagService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Title": "UserQuizServiceTests.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\UserQuizServiceTests.cs",
+              "RelativeDocumentMoniker": "QuizTest\\ServiceTests\\UserQuizServiceTests.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\UserQuizServiceTests.cs",
+              "RelativeToolTip": "QuizTest\\ServiceTests\\UserQuizServiceTests.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T22:43:40.531Z",
+              "WhenOpened": "2024-10-31T21:17:07.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TypeServiceTests.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\TypeServiceTests.cs",
+              "RelativeDocumentMoniker": "QuizTest\\ServiceTests\\TypeServiceTests.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\TypeServiceTests.cs",
+              "RelativeToolTip": "QuizTest\\ServiceTests\\TypeServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T21:16:44.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TagServiceTests.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\TagServiceTests.cs",
+              "RelativeDocumentMoniker": "QuizTest\\ServiceTests\\TagServiceTests.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\TagServiceTests.cs",
+              "RelativeToolTip": "QuizTest\\ServiceTests\\TagServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T21:16:33.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RoleServiceTests.cs",
+              "DocumentMoniker": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\RoleServiceTests.cs",
+              "RelativeDocumentMoniker": "QuizTest\\ServiceTests\\RoleServiceTests.cs",
+              "ToolTip": "D:\\Mentorship_Program\\Quiz challenge\\Quiz\\QuizTest\\ServiceTests\\RoleServiceTests.cs",
+              "RelativeToolTip": "QuizTest\\ServiceTests\\RoleServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T21:16:17.351Z",
               "EditorCaption": ""
             }
           ]

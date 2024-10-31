@@ -115,5 +115,33 @@ namespace QuizChallenge.Repositories
             }
             return roles;
         }
+
+        public List<User> GetUsersByRoleId(int roleId)
+        {
+            var users = new List<User>();
+            using var connection = new SqlConnection(_connectionString);
+            var command = new SqlCommand(
+                @"SELECT u.Id, u.UserName, u.Email, u.Password, u.CreatedAt, u.UpdatedAt
+              FROM Users u
+              INNER JOIN UserRoles ur ON u.Id = ur.UserId
+              WHERE ur.RoleId = @RoleId", connection);
+            command.Parameters.AddWithValue("@RoleId", roleId);
+            connection.Open();
+
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                users.Add(new User
+                {
+                    Id = (int)reader["Id"],
+                    UserName = reader["UserName"].ToString(),
+                    Email = reader["Email"].ToString(),
+                    Password = reader["Password"].ToString(),
+                    CreatedAt = (DateTime)reader["CreatedAt"],
+                    UpdatedAt = (DateTime)reader["UpdatedAt"]
+                });
+            }
+            return users;
+        }
     }
 }
