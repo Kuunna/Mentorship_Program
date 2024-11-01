@@ -18,7 +18,7 @@ namespace QuizChallenge.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("INSERT INTO Quizzes (Title, CreatedAt, Description, TimeLimit) VALUES (@Title, @CreatedAt, @Description, @TimeLimit)", connection);
+                var command = new SqlCommand("INSERT INTO Quiz (Title, CreatedAt, Description, TimeLimit) VALUES (@Title, @CreatedAt, @Description, @TimeLimit)", connection);
                 command.Parameters.AddWithValue("@Title", quiz.Title);
                 command.Parameters.AddWithValue("@CreatedAt", quiz.CreatedAt);
                 command.Parameters.AddWithValue("@Description", quiz.Description);
@@ -33,7 +33,7 @@ namespace QuizChallenge.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Quizzes WHERE Id = @Id", connection);
+                var command = new SqlCommand("SELECT * FROM Quiz WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
                 connection.Open();
@@ -57,16 +57,16 @@ namespace QuizChallenge.Repositories
 
         public List<Quiz> GetAllQuizzes()
         {
-            var quizzes = new List<Quiz>();
+            var Quiz = new List<Quiz>();
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Quizzes", connection);
+                var command = new SqlCommand("SELECT * FROM Quiz", connection);
                 connection.Open();
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        quizzes.Add(new Quiz
+                        Quiz.Add(new Quiz
                         {
                             Id = (int)reader["Id"],
                             Title = reader["Title"].ToString(),
@@ -77,7 +77,7 @@ namespace QuizChallenge.Repositories
                     }
                 }
             }
-            return quizzes;
+            return Quiz;
         }
 
         public void AddQuestionToQuiz(int quizId, int questionId)
@@ -110,7 +110,7 @@ namespace QuizChallenge.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("UPDATE Quizzes SET Title = @Title, Description = @Description, TimeLimit = @TimeLimit WHERE Id = @Id", connection);
+                var command = new SqlCommand("UPDATE Quiz SET Title = @Title, Description = @Description, TimeLimit = @TimeLimit WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", quiz.Id);
                 command.Parameters.AddWithValue("@Title", quiz.Title);
                 command.Parameters.AddWithValue("@Description", quiz.Description);
@@ -125,7 +125,7 @@ namespace QuizChallenge.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("DELETE FROM Quizzes WHERE Id = @Id", connection);
+                var command = new SqlCommand("DELETE FROM Quiz WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
                 connection.Open();

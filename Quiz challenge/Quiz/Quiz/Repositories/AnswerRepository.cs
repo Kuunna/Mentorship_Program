@@ -27,8 +27,32 @@ namespace QuizChallenge.Repositories
                 command.ExecuteNonQuery();
             }
         }
+        public List<Answer> GetAllAnswer()
+        {
+            var Answer = new List<Answer>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT * FROM Answer", connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Answer.Add(new Answer
+                        {
+                            Id = (int)reader["Id"],
+                            AnswerText = reader["AnswerText"].ToString(),
+                            IsCorrect = (bool)reader["IsCorrect"],
+                            IsDynamic = (bool)reader["IsDynamic"],
+                            CanBeSuggested = (bool)reader["CanBeSuggested"]
+                        });
+                    }
+                }
+            }
+            return Answer;
+        }
 
-        public Answer GetAnswerById(int id)
+            public Answer GetAnswerById(int id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
